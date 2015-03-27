@@ -5,7 +5,7 @@ RUN sudo apt-get update
 RUN sudo apt-get install -y git
 #RUN git clone https://github.com/swcarpentry/shell-novice.git
 
-RUN sudo apt-get install -y nano vim wget
+RUN sudo apt-get install -y nano vim wget man
 
 RUN useradd nelle -d /users/nelle -p elephant
 RUN useradd imhotep -d /users/imhotep
@@ -31,7 +31,7 @@ RUN chown -R larry /users/larry
 RUN chown -R dru /users/dru
 RUN chown -R gorgon /users/gorgon
 
-RUN chmod 711 /users/nelle
+RUN chmod 771 /users/nelle
 RUN chmod 711 /users/imhotep
 RUN chmod 711 /users/larry
 RUN chmod 711 /users/dru
@@ -39,6 +39,7 @@ RUN chmod 711 /users/gorgon
 
 RUN git clone https://github.com/swcarpentry/shell-novice.git
 RUN scp -r shell-novice/filesystem/nelle /users/
+RUN chown -R nelle /users/nelle
 RUN rm -r shell-novice
 
 USER nelle
