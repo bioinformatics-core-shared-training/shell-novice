@@ -19,91 +19,90 @@
     <![endif]-->
   </head>
   <body class="lesson">
-    <div class="container container-full-width card">
+  <div class="container container-full-width card">
       <div class="banner">
-        <a href="http://software-carpentry.org" title="Software Carpentry">
-          <img alt="Software Carpentry banner" src="img/software-carpentry-banner.png" />
-        </a>
-        <a href="http://www.cruk.cam.ac.uk/" title="CRUK Cambridge Institute"><img height="40" width="200" align="right" src="img/cruk-cambridge-institute.jpg"/></a>
+          <a href="http://software-carpentry.org" title="Software Carpentry">
+              <img alt="Software Carpentry banner" src="img/software-carpentry-banner.png" />
+          </a>
+          <a href="http://www.cruk.cam.ac.uk/" title="CRUK Cambridge Institute"><img height="40" width="200" align="right" src="img/cruk-cambridge-institute.jpg"/></a>
       </div>
       <div class="row-fluid">
-        <div class="span10 offset1">
-        
-          <h1 class="title">Acknowledgements</h1>
-        <p>
-          This repository is based on the shell-novice material from the Software Carpentry Foundation. It is being developed in collaboration between the <a href="http://www.cruk.cam.ac.uk/core-facilities/it-core">Scientific Computing</a> and <a href="http://www.cruk.cam.ac.uk/core-facilities/bioinformatics-core">Bioinformatics Core</a> teams at <a href="http://www.cruk.cam.ac.uk">Cancer Research Uk Cambridge Institute.</a>
-        </p>
-          <h1 class="title">The Unix Shell</h1>
-          
-<p>The Unix shell has been around longer than most of its users have been alive. It has survived so long because it's a power tool that allows people to do complex things with just a few keystrokes. More importantly, it helps them combine existing programs in new ways and automate repetitive tasks so that they don't have to type the same things over and over again. Use of the shell is fundamental to using a wide range of other powerful tools and computing resources (including &quot;high performance computing&quot; supercomputers). These lessons will start you on a path towards using these resources effectively.</p>
-<blockquote>
-<h2>Prerequisites</h2>
-<p>This lesson guides you through the basics of filesystems and the shell. If you have stored files on a computer at all and recognize the word “file” and either “directory” or “folder” (two common words for the same thing), you're ready for this lesson.</p>
-<p>If you're already comfortable manipulating files and directories, searching for files with <code>grep</code> and <code>find</code>, and writing simple loops and scripts, you probably won't learn much from this lesson.</p>
-</blockquote>
+          <div class="span10 offset1">
 
-<blockquote>
-  <h2>Software</h2>
-  <p>In order to follow the examples for each topic on your Mac or PC, you will need to install the boot2docker software. This will allow you the same computer setup described in the course, without having to make permanent changes to your own machine. Please see our <a href="install.pdf">Installation guide</a> for step-by-step instructions.
-  </p>
-  
-  <p>Once you have boot2docker installed, an icon should appear on your Desktop (Windows) or Applications folder (Mac). After running this new application, a new window should appear will various lines of white text on a black background. The last line should read;
-  
-<pre class="input"><code>docker@boot2docker:~$</code></pre>
+              <h1 class="title">Acknowledgements</h1>
+              <p>
+                  This repository is based on the shell-novice material from the Software Carpentry Foundation. It is being developed in collaboration between the <a href="http://www.cruk.cam.ac.uk/core-facilities/it-core">Scientific Computing</a> and <a href="http://www.cruk.cam.ac.uk/core-facilities/bioinformatics-core">Bioinformatics Core</a> teams at <a href="http://www.cruk.cam.ac.uk">Cancer Research Uk Cambridge Institute.</a>
+              </p>
+              <h1 class="title">The Unix Shell</h1>
 
-Now carefully type the following line of text (using the correct spaces and punctuation is very important!)
+              <p>The Unix shell has been around longer than most of its users have been alive. It has survived so long because it's a power tool that allows people to do complex things with just a few keystrokes. More importantly, it helps them combine existing programs in new ways and automate repetitive tasks so that they don't have to type the same things over and over again. Use of the shell is fundamental to using a wide range of other powerful tools and computing resources (including &quot;high performance computing&quot; supercomputers). These lessons will start you on a path towards using these resources effectively.</p>
+              <blockquote>
+                  <h2>Prerequisites</h2>
+                  <p>This lesson guides you through the basics of filesystems and the shell. If you have stored files on a computer at all and recognize the word “file” and either “directory” or “folder” (two common words for the same thing), you're ready for this lesson.</p>
+                  <p>If you're already comfortable manipulating files and directories, searching for files with <code>grep</code> and <code>find</code>, and writing simple loops and scripts, you probably won't learn much from this lesson.</p>
+              </blockquote>
 
-<pre class="input"><code>docker run -ti markdunning/unix-training</code></pre>
-   
-   This may download and install some data. Once this has finished, you are now ready to walkthrough the examples
-   
-  </p>
-</blockquote>
+              <blockquote>
+                  <h2>Software</h2>
+                  <p>In order to follow the examples for each topic on your Mac or PC, you will need to install the boot2docker software. This will allow you the same computer setup described in the course, without having to make permanent changes to your own machine. Please see our <a href="install.pdf">Installation guide</a> for step-by-step instructions.
+                  </p>
 
-<h2 id="topics">Slides</h2>
+                  <p>Once you have boot2docker installed, an icon should appear on your Desktop (Windows) or Applications folder (Mac). After running this new application, a new window should appear will various lines of white text on a black background. The last line should read;
+
+                  <pre class="input"><code>docker@boot2docker:~$</code></pre>
+
+                  Now carefully type the following line of text (using the correct spaces and punctuation is very important!)
+
+                  <pre class="input"><code>docker run -ti markdunning/unix-training</code></pre>
+
+                  This may download and install some data. Once this has finished, you are now ready to walkthrough the examples
+
+                  </p>
+              </blockquote>
+
+              <h2 id="topics">Slides</h2>
 
 
-<h2 id="topics">Topics</h2>
+              <h2 id="topics">Topics</h2>
 
-<p>The pages linked below are used to illustrate the concepts introduced in the slides. Each box with green text indicates a command that you can enter in boot2docker.
-  <pre class="input"><code>$</code></pre>
-  You should check that you get the same output as printed in the blue text
-  
-  Please feel free to experiment with the commands and try things out. You cannot break anything on your own machine! If you get stuck, just close and restart boot2docker and re-enter the command to start the image
-  <pre class="input"><code>docker run -ti markdunning/unix-training</code></pre>
-  
-  </p>
+              <p>The pages linked below are used to illustrate the concepts introduced in the slides. Each box with green text indicates a command that you can enter in boot2docker.
+              <pre class="input"><code>$</code></pre>
+              You should check that you get the same output as printed in the blue text
 
-<ol style="list-style-type: decimal">
-    <li><a href="00-intro.html">Introducing the Shell</a></li>
-    <li><a href="01-filedir.html">Files and Directories</a></li>
-    <li><a href="02-create.html">Creating Things</a></li>
-    <li><a href="03-pipefilter.html">Pipes and Filters</a></li>
-    <li><a href="07-transfer.html">Transferring Files</a></li>
-    <li><a href="08-permissions.html">File Permissions</a></li>
-    <li><a href="04-loop.html">Loops</a></li>
-    <li><a href="05-script.html">Shell Scripts</a></li>
-    <li><a href="06-find.html">Finding Things</a></li>
-</ol>
-<!--
-<h2 id="other-resources">Other Resources</h2>
-<ul>
-<li><a href="motivation.html">Motivation</a></li>
-<li><a href="reference.html">Reference</a></li>
-<li><a href="discussion.html">Discussion</a></li>
-<li><a href="instructors.html">Instructor's Guide</a></li>
-</ul-->
-        </div>
+              Please feel free to experiment with the commands and try things out. You cannot break anything on your own machine! If you get stuck, just close and restart boot2docker and re-enter the command to start the image
+              <pre class="input"><code>docker run -ti markdunning/unix-training</code></pre>
+
+              </p>
+
+              <ol style="list-style-type: decimal">
+                  <li><a href="00-intro.html">Introducing the Shell</a></li>
+                  <li><a href="01-filedir.html">Files and Directories</a></li>
+                  <li><a href="02-create.html">Creating Things</a></li>
+                  <li><a href="03-pipefilter.html">Pipes and Filters</a></li>
+                  <li><a href="04-find.html">Finding Things</a></li>
+                  <li><a href="05-transfer.html">Transferring Files</a></li>
+                  <li><a href="06-loop.html">Loops</a></li>
+                  <li><a href="07-script.html">Shell Scripts</a></li>
+              </ol>
+
+              <h2 id="other-resources">Other Resources</h2>
+              <ul>
+                  <li><a href="motivation.html">Motivation</a></li>
+                  <li><a href="reference.html">Reference</a></li>
+                  <li><a href="discussion.html">Discussion</a></li>
+                  <li><a href="instructors.html">Instructor's Guide</a></li>
+              </ul>
+          </div>
       </div>
       <div class="footer">
-        <a class="label swc-blue-bg" href="http://software-carpentry.org">Software Carpentry</a>
-        <a class="label swc-blue-bg" href="https://github.com/bioinformatics-core-shared-training/shell-novice">Source</a>
-        <a class="label swc-blue-bg" href="mailto:mark.dunning@cruk.cam.ac.uk">Contact</a>
-        <a class="label swc-blue-bg" href="LICENSE.html">License</a>
+          <a class="label swc-blue-bg" href="http://software-carpentry.org">Software Carpentry</a>
+          <a class="label swc-blue-bg" href="https://github.com/bioinformatics-core-shared-training/shell-novice">Source</a>
+          <a class="label swc-blue-bg" href="mailto:mark.dunning@cruk.cam.ac.uk">Contact</a>
+          <a class="label swc-blue-bg" href="LICENSE.html">License</a>
       </div>
-    </div>
-    <!-- Javascript placed at the end of the document so the pages load faster -->
-    <script src="http://software-carpentry.org/v5/js/jquery-1.9.1.min.js"></script>
-    <script src="http://software-carpentry.org/v5/js/bootstrap/bootstrap.min.js"></script>
+  </div>
+  <!-- Javascript placed at the end of the document so the pages load faster -->
+  <script src="http://software-carpentry.org/v5/js/jquery-1.9.1.min.js"></script>
+  <script src="http://software-carpentry.org/v5/js/bootstrap/bootstrap.min.js"></script>
   </body>
 </html>
