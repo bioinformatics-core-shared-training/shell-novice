@@ -79,16 +79,16 @@
             <p>Let's see what's in Nelle's home directory by running <code>ls</code>, which stands for &quot;listing&quot;:</p>
             <pre class="input"><code>$ ls</code></pre>
 <pre class="output"><code>creatures  molecules           pizza.cfg
-    data       north-pacific-gyre  solar.pdf
-    Desktop    notes.txt           writing</code></pre>
+data       north-pacific-gyre  solar.pdf
+Desktop    notes.txt           writing</code></pre>
             <div class="figure">
                 <img src="fig/homedir.svg" alt="Nelle&#39;s Home Directory" /><p class="caption">Nelle's Home Directory</p>
             </div>
             <p><code>ls</code> prints the names of the files and directories in the current directory in alphabetical order, arranged neatly into columns. We can make its output more comprehensible by using the <strong>flag</strong> <code>-F</code>, which tells <code>ls</code> to add a trailing <code>/</code> to the names of directories:</p>
             <pre class="input"><code>$ ls -F</code></pre>
 <pre class="output"><code>creatures/  molecules/           pizza.cfg
-    data/       north-pacific-gyre/  solar.pdf
-    Desktop/    notes.txt            writing/</code></pre>
+data/       north-pacific-gyre/  solar.pdf
+Desktop/    notes.txt            writing/</code></pre>
             <p>Here, we can see that <code>/users/nelle</code> contains seven <strong>sub-directories</strong>. The names that don't have trailing slashes, like <code>notes.txt</code>, <code>pizza.cfg</code>, and <code>solar.pdf</code>, are plain old files. And note that there is a space between <code>ls</code> and <code>-F</code>: without it, the shell thinks we're trying to run a command called <code>ls-F</code>, which doesn't exist.</p>
             <div id="whats-in-a-name" class="callout">
                 <h2>What's In A Name?</h2>
@@ -99,7 +99,7 @@
             <p>Now let's take a look at what's in Nelle's <code>data</code> directory by running <code>ls -F data</code>, i.e., the command <code>ls</code> with the <strong>arguments</strong> <code>-F</code> and <code>data</code>. The second argument --- the one <em>without</em> a leading dash --- tells <code>ls</code> that we want a listing of something other than our current working directory:</p>
             <pre class="input"><code>$ ls -F data</code></pre>
 <pre class="output"><code>amino-acids.txt   elements/     morse.txt
-    pdb/              planets.txt   sunspot.txt</code></pre>
+pdb/              planets.txt   sunspot.txt</code></pre>
             <p>The output shows us that there are four text files and two sub-sub-directories. Organizing things hierarchically in this way helps us keep track of our work: it's possible to put hundreds of files in our home directory, just as it's possible to pile hundreds of printed papers on our desk, but it's a self-defeating strategy.</p>
             <p>Notice, by the way that we spelled the directory name <code>data</code>. It doesn't have a trailing slash: that's added to directory names by <code>ls</code> when we use the <code>-F</code> flag to help us tell things apart. And it doesn't begin with a slash because it's a <strong>relative path</strong>, i.e., it tells <code>ls</code> how to find something from where we are, rather than from the root of the file system.</p>
             <div id="parameters-vs.-arguments" class="callout">
@@ -109,15 +109,15 @@
             <p>If we run <code>ls -F /data</code> (<em>with</em> a leading slash) we get a different answer, because <code>/data</code> is an <strong>absolute path</strong>:</p>
             <pre class="input"><code>$ ls -F /data</code></pre>
 <pre class="output"><code>access.log    backup/    hardware.cfg
-    network.cfg</code></pre>
+network.cfg</code></pre>
             <p>The leading <code>/</code> tells the computer to follow the path from the root of the filesystem, so it always refers to exactly one directory, no matter where we are when we run the command.</p>
             <p>What if we want to change our current working directory? Before we do this, <code>pwd</code> shows us that we're in <code>/users/nelle</code>, and <code>ls</code> without any arguments shows us that directory's contents:</p>
             <pre class="input"><code>$ pwd</code></pre>
             <pre class="output"><code>/users/nelle</code></pre>
             <pre class="input"><code>$ ls</code></pre>
 <pre class="output"><code>creatures  molecules           pizza.cfg
-    data       north-pacific-gyre  solar.pdf
-    Desktop    notes.txt           writing</code></pre>
+data       north-pacific-gyre  solar.pdf
+Desktop    notes.txt           writing</code></pre>
             <p>We can use <code>cd</code> followed by a directory name to change our working directory. <code>cd</code> stands for &quot;change directory&quot;, which is a bit misleading: the command doesn't change the directory, it changes the shell's idea of what directory we are in.</p>
             <pre class="input"><code>$ cd data</code></pre>
             <p><code>cd</code> doesn't print anything, but if we run <code>pwd</code> after it, we can see that we are now in <code>/users/nelle/data</code>. If we run <code>ls</code> without arguments now, it lists the contents of <code>/users/nelle/data</code>, because that's where we now are:</p>
@@ -125,7 +125,7 @@
             <pre class="output"><code>/users/nelle/data</code></pre>
             <pre class="input"><code>$ ls -F</code></pre>
 <pre class="output"><code>amino-acids.txt   elements/     morse.txt
-    pdb/              planets.txt   sunspot.txt</code></pre>
+pdb/              planets.txt   sunspot.txt</code></pre>
             <p>We now know how to go down the directory tree: how do we go up? We could use an absolute path:</p>
             <pre class="input"><code>$ cd /users/nelle</code></pre>
             <p>but it's almost always simpler to use <code>cd ..</code> to go up one level:</p>
@@ -138,9 +138,9 @@
             <p>The special directory <code>..</code> doesn't usually show up when we run <code>ls</code>. If we want to display it, we can give <code>ls</code> the <code>-a</code> flag:</p>
             <pre class="input"><code>$ ls -F -a</code></pre>
 <pre class="output"><code>./                  creatures/          notes.txt
-    ../                 data/               pizza.cfg
-    .bash_profile       molecules/          solar.pdf
-    Desktop/            north-pacific-gyre/ writing/</code></pre>
+../                 data/               pizza.cfg
+.bash_profile       molecules/          solar.pdf
+Desktop/            north-pacific-gyre/ writing/</code></pre>
             <p><code>-a</code> stands for &quot;show all&quot;; it forces <code>ls</code> to show us file and directory names that begin with <code>.</code>, such as <code>..</code> (which, if we're in <code>/users/nelle</code>, refers to the <code>/users</code> directory). As you can see, it also displays another special directory that's just called <code>.</code>, which means &quot;the current working directory&quot;. It may seem redundant to have a name for it, but we'll see some uses for it soon.<br />Finally, we also see a file called <code>.bash_profile</code>. This file usually contains settings to customize the shell (terminal). There may also be similar files called <code>.bashrc</code> or <code>.bash_login</code>. For this lesson material it does not contain any settings.</p>
             <div id="orthogonality" class="callout">
                 <h2>Orthogonality</h2>

@@ -45,30 +45,30 @@
             <pre class="output"><code>/users/nelle</code></pre>
             <pre class="input"><code>$ ls -F</code></pre>
 <pre class="output"><code>creatures/  molecules/           pizza.cfg
-    data/       north-pacific-gyre/  solar.pdf
-    Desktop/    notes.txt            writing/</code></pre>
+data/       north-pacific-gyre/  solar.pdf
+Desktop/    notes.txt            writing/</code></pre>
             <p>Let's create a new directory called <code>thesis</code> using the command <code>mkdir thesis</code> (which has no output):</p>
             <pre class="input"><code>$ mkdir thesis</code></pre>
             <p>As you might (or might not) guess from its name, <code>mkdir</code> means &quot;make directory&quot;. Since <code>thesis</code> is a relative path (i.e., doesn't have a leading slash), the new directory is created in the current working directory:</p>
             <pre class="input"><code>$ ls -F</code></pre>
 <pre class="output"><code>creatures/  north-pacific-gyre/  thesis/
-    data/       notes.txt            writing/
-    Desktop/    pizza.cfg
-    molecules/  solar.pdf</code></pre>
+data/       notes.txt            writing/
+Desktop/    pizza.cfg
+molecules/  solar.pdf</code></pre>
             <p>However, there's nothing in it yet:</p>
             <pre class="input"><code>$ ls -F thesis</code></pre>
             <div id="touching-files" class="callout">
                 <h2>Touching Files</h2>
                 <p>One of the simplest ways to create an empty file is via the <code>touch</code> command. Change the working directory to <code>thesis</code> using <code>cd</code>, then touch an empty file called <code>draft.txt</code>:</p>
 <pre class="input"><code>$ cd thesis
-    $ touch draft.txt</code></pre>
+$ touch draft.txt</code></pre>
                 <p>If we check the directory contents now,</p>
                 <pre class="input"><code>$ ls -F .</code></pre>
                 <pre class="output"><code>draft.txt</code></pre>
             </div>
             <p>Let's change our working directory to <code>thesis</code> using <code>cd</code>, then run a text editor called Nano to create a file called <code>draft.txt</code>:</p>
 <pre class="input"><code>$ cd thesis
-    $ nano draft.txt</code></pre>
+$ nano draft.txt</code></pre>
             <div id="which-editor" class="callout">
                 <h2>Which Editor?</h2>
                 <p>When we say, &quot;<code>nano</code> is a text editor,&quot; we really do mean &quot;text&quot;: it can only work with plain character data, not tables, images, or any other human-friendly media. We use it in examples because almost anyone can drive it anywhere without training, but please use something more powerful for real work. On Unix systems (such as Linux and Mac OS X), many programmers use <a href="http://www.gnu.org/software/emacs/">Emacs</a> or <a href="http://www.vim.org/">Vim</a> (both of which are completely unintuitive, even by Unix standards), or a graphical editor such as <a href="http://projects.gnome.org/gedit/">Gedit</a>. On Windows, you may wish to use <a href="http://notepad-plus-plus.org/">Notepad++</a>.</p>
@@ -93,7 +93,7 @@
             <pre class="input"><code>$ pwd</code></pre>
             <pre class="output"><code>/users/nelle/thesis</code></pre>
 <pre class="input"><code>$ nano draft.txt
-    $ ls</code></pre>
+$ ls</code></pre>
             <pre class="output"><code>draft.txt</code></pre>
             <pre class="input"><code>$ cd ..</code></pre>
             <p>If we try to remove the entire <code>thesis</code> directory using <code>rm thesis</code>, we get an error message:</p>
@@ -117,7 +117,7 @@
             <pre class="output"><code>/users/nelle</code></pre>
             <pre class="input"><code>$ mkdir thesis</code></pre>
 <pre class="input"><code>$ nano thesis/draft.txt
-    $ ls thesis</code></pre>
+$ ls thesis</code></pre>
             <pre class="output"><code>draft.txt</code></pre>
             <p><code>draft.txt</code> isn't a particularly informative name, so let's change the file's name using <code>mv</code>, which is short for &quot;move&quot;:</p>
             <pre class="input"><code>$ mv thesis/draft.txt thesis/quotes.txt</code></pre>
@@ -134,13 +134,13 @@
             <pre class="output"><code>quotes.txt</code></pre>
             <p>The <code>cp</code> command works very much like <code>mv</code>, except it copies a file instead of moving it. We can check that it did the right thing using <code>ls</code> with two paths as parameters --- like most Unix commands, <code>ls</code> can be given thousands of paths at once:</p>
 <pre class="input"><code>$ cp quotes.txt thesis/quotations.txt
-    $ ls quotes.txt thesis/quotations.txt</code></pre>
+$ ls quotes.txt thesis/quotations.txt</code></pre>
             <pre class="output"><code>quotes.txt   thesis/quotations.txt</code></pre>
             <p>To prove that we made a copy, let's delete the <code>quotes.txt</code> file in the current directory and then run that same <code>ls</code> again.</p>
 <pre class="input"><code>$ rm quotes.txt
-    $ ls quotes.txt thesis/quotations.txt</code></pre>
+$ ls quotes.txt thesis/quotations.txt</code></pre>
 <pre class="error"><code>ls: cannot access quotes.txt: No such file or directory
-    thesis/quotations.txt</code></pre>
+thesis/quotations.txt</code></pre>
             <p>This time it tells us that it can't find <code>quotes.txt</code> in the current directory, but it does find the copy in <code>thesis</code> that we didn't delete.</p>
             <div id="another-useful-abbreviation" class="callout">
                 <h2>Another Useful Abbreviation</h2>
@@ -161,13 +161,13 @@
                 <h2>Moving and Copying</h2>
                 <p>What is the output of the closing <code>ls</code> command in the sequence shown below?</p>
 <pre><code>$ pwd
-    /home/jamie/data
-    $ ls
-    proteins.dat
-    $ mkdir recombine
-    $ mv proteins.dat recombine
-    $ cp recombine/proteins.dat ../proteins-saved.dat
-    $ ls</code></pre>
+/home/jamie/data
+$ ls
+proteins.dat
+$ mkdir recombine
+$ mv proteins.dat recombine
+$ cp recombine/proteins.dat ../proteins-saved.dat
+$ ls</code></pre>
                 <ol style="list-style-type: decimal">
                     <li><code>proteins-saved.dat recombine</code></li>
                     <li><code>recombine</code></li>
@@ -179,22 +179,22 @@
                 <h2>Listing Directories and Files</h2>
                 <p>Suppose that:</p>
 <pre><code>$ ls -F
-    analyzed/  fructose.dat    raw/   sucrose.dat</code></pre>
+analyzed/  fructose.dat    raw/   sucrose.dat</code></pre>
                 <p>What command(s) could you run so that the commands below will produce the output shown?</p>
 <pre><code>$ ls
-    analyzed/   raw/
-    $ ls analyzed
-    fructose.dat    sucrose.dat</code></pre>
+analyzed/   raw/
+$ ls analyzed
+fructose.dat    sucrose.dat</code></pre>
             </div>
             <div id="copy-with-multiple-filenames" class="challenge">
                 <h2>Copy with Multiple Filenames</h2>
                 <p>What does <code>cp</code> do when given several filenames and a directory name, as in:</p>
 <pre><code>$ mkdir backup
-    $ cp thesis/citations.txt thesis/quotations.txt backup</code></pre>
+$ cp thesis/citations.txt thesis/quotations.txt backup</code></pre>
                 <p>What does <code>cp</code> do when given three or more filenames, as in:</p>
 <pre><code>$ ls -F
-    intro.txt    methods.txt    survey.txt
-    $ cp intro.txt methods.txt survey.txt</code></pre>
+intro.txt    methods.txt    survey.txt
+$ cp intro.txt methods.txt survey.txt</code></pre>
             </div>
             <div id="listing-recursively-and-by-time" class="challenge">
                 <h2>Listing Recursively and By Time</h2>
