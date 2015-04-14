@@ -117,7 +117,7 @@ unicorn.dat</code></pre>
                 <p>We can make our script a little bit more robust by <strong>quoting</strong> our use of the variable:</p>
 <pre><code>for filename in *.dat
 do
-head -100 &quot;$filename&quot; | tail -20
+   head -100 &quot;$filename&quot; | tail -20
 done</code></pre>
                 <p>but it's simpler just to avoid using spaces (or other special characters) in filenames.</p>
             </div>

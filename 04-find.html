@@ -31,7 +31,7 @@
             <h1 class="title">The Unix Shell</h1>
             <p><a href="index.html">To go back to the home page</a></p>
             <h2 class="subtitle">Finding Things</h2>
-            <blockquote>
+            <div id="learning-objectives" class="objectives">
                 <h2>Learning Objectives</h2>
                 <ul>
                     <li>Use <code>grep</code> to select lines from text files that match simple patterns.</li>
@@ -39,7 +39,7 @@
                     <li>Use the output of one command as the command-line parameters to another command.</li>
                     <li>Explain what is meant by &quot;text&quot; and &quot;binary&quot; files, and why many common tools don't handle the latter well.</li>
                 </ul>
-            </blockquote>
+            </div>
             <p>You can guess someone's age by how they talk about search: young people use &quot;Google&quot; as a verb, while crusty old Unix programmers use &quot;grep&quot;. The word is a contraction of &quot;global/regular expression/print&quot;, a common sequence of operations in early Unix text editors. It is also the name of a very useful command-line program.</p>
             <p><code>grep</code> finds and prints lines in files that match a pattern. For our examples, we will use a file that contains three haikus taken from a 1998 competition in <em>Salon</em> magazine. For this set of examples we're going to be working in the writing subdirectory:</p>
 <pre class="input"><code>$ cd
@@ -141,10 +141,10 @@ Software is like that.</code></pre>
             <p>For our first command, let's run <code>find . -type d</code>. As always, the <code>.</code> on its own means the current working directory, which is where we want our search to start; <code>-type d</code> means &quot;things that are directories&quot;. Sure enough, <code>find</code>'s output is the names of the five directories in our little tree (including <code>.</code>):</p>
             <pre class="input"><code>$ find . -type d</code></pre>
 <pre class="output"><code>./
-    ./data
-    ./thesis
-    ./tools
-    ./tools/old</code></pre>
+./data
+./thesis
+./tools
+./tools/old</code></pre>
             <p>If we change <code>-type d</code> to <code>-type f</code>, we get a listing of all the files instead:</p>
             <pre class="input"><code>$ find . -type f</code></pre>
 <pre class="output"><code>./haiku.txt

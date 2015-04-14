@@ -31,7 +31,7 @@
             <h1 class="title">The Unix Shell</h1>
             <p><a href="index.html">To go back to the home page</a></p>
             <h2 class="subtitle">Pipes and Filters</h2>
-            <blockquote>
+            <div id="learning-objectives" class="objectives">
                 <h2>Learning Objectives</h2>
                 <ul>
                     <li>Redirect a command's output to a file.</li>
@@ -40,7 +40,7 @@
                     <li>Explain what usually happens if a program or pipeline isn't given any input to process.</li>
                     <li>Explain Unix's &quot;small pieces, loosely joined&quot; philosophy.</li>
                 </ul>
-            </blockquote>
+            </div>
             <p>Now that we know a few basic commands, we can finally look at the shell's most powerful feature: the ease with which it lets us combine existing programs in new ways. We'll start with a directory called <code>molecules</code> that contains six files describing some simple organic molecules. The <code>.pdb</code> extension indicates that these files are in Protein Data Bank format, a simple text format that specifies the type and position of each atom in the molecule.</p>
             <pre class="input"><code>$ ls molecules</code></pre>
 <pre class="output"><code>cubane.pdb    ethane.pdb    methane.pdb
@@ -48,7 +48,7 @@ octane.pdb    pentane.pdb   propane.pdb</code></pre>
             <p>Let's go into that directory with <code>cd</code> and run the command <code>wc *.pdb</code>. <code>wc</code> is the &quot;word count&quot; command: it counts the number of lines, words, and characters in files. The <code>*</code> in <code>*.pdb</code> matches zero or more characters, so the shell turns <code>*.pdb</code> into a complete list of <code>.pdb</code> files:</p>
 <pre class="input"><code>$ cd molecules
 $ wc *.pdb</code></pre>
-<pre class="output"><code>  20  156 1158 cubane.pdb
+<pre class="output"><code>20  156 1158 cubane.pdb
 12   84  622 ethane.pdb
 9   57  422 methane.pdb
 30  246 1828 octane.pdb
@@ -63,7 +63,7 @@ $ wc *.pdb</code></pre>
             </div>
             <p>If we run <code>wc -l</code> instead of just <code>wc</code>, the output shows only the number of lines per file:</p>
             <pre class="input"><code>$ wc -l *.pdb</code></pre>
-<pre class="output"><code>  20  cubane.pdb
+<pre class="output"><code>20  cubane.pdb
 12  ethane.pdb
 9  methane.pdb
 30  octane.pdb
@@ -78,7 +78,7 @@ $ wc *.pdb</code></pre>
             <pre class="output"><code>lengths.txt</code></pre>
             <p>We can now send the content of <code>lengths.txt</code> to the screen using <code>cat lengths.txt</code>. <code>cat</code> stands for &quot;concatenate&quot;: it prints the contents of files one after another. There's only one file in this case, so <code>cat</code> just shows us what it contains:</p>
             <pre class="input"><code>$ cat lengths.txt</code></pre>
-<pre class="output"><code>  20  cubane.pdb
+<pre class="output"><code>20  cubane.pdb
 12  ethane.pdb
 9  methane.pdb
 30  octane.pdb
@@ -87,7 +87,7 @@ $ wc *.pdb</code></pre>
 107  total</code></pre>
             <p>Now let's use the <code>sort</code> command to sort its contents. We will also use the -n flag to specify that the sort is numerical instead of alphabetical. This does <em>not</em> change the file; instead, it sends the sorted result to the screen:</p>
             <pre class="input"><code>$ sort -n lengths.txt</code></pre>
-<pre class="output"><code>  9  methane.pdb
+<pre class="output"><code>9  methane.pdb
 12  ethane.pdb
 15  propane.pdb
 20  cubane.pdb
@@ -97,15 +97,15 @@ $ wc *.pdb</code></pre>
             <p>We can put the sorted list of lines in another temporary file called <code>sorted-lengths.txt</code> by putting <code>&gt; sorted-lengths.txt</code> after the command, just as we used <code>&gt; lengths.txt</code> to put the output of <code>wc</code> into <code>lengths.txt</code>. Once we've done that, we can run another command called <code>head</code> to get the first few lines in <code>sorted-lengths.txt</code>:</p>
 <pre class="input"><code>$ sort -n lengths.txt &gt; sorted-lengths.txt
 $ head -1 sorted-lengths.txt</code></pre>
-            <pre class="output"><code>  9  methane.pdb</code></pre>
+            <pre class="output"><code>9  methane.pdb</code></pre>
             <p>Using the parameter <code>-1</code> with <code>head</code> tells it that we only want the first line of the file; <code>-20</code> would get the first 20, and so on. Since <code>sorted-lengths.txt</code> contains the lengths of our files ordered from least to greatest, the output of <code>head</code> must be the file with the fewest lines.</p>
             <p>If you think this is confusing, you're in good company: even once you understand what <code>wc</code>, <code>sort</code>, and <code>head</code> do, all those intermediate files make it hard to follow what's going on. We can make it easier to understand by running <code>sort</code> and <code>head</code> together:</p>
             <pre class="input"><code>$ sort -n lengths.txt | head -1</code></pre>
-            <pre class="output"><code>  9  methane.pdb</code></pre>
+            <pre class="output"><code>9  methane.pdb</code></pre>
             <p>The vertical bar between the two commands is called a <strong>pipe</strong>. It tells the shell that we want to use the output of the command on the left as the input to the command on the right. The computer might create a temporary file if it needs to, or copy data from one program to the other in memory, or something else entirely; we don't have to know or care.</p>
             <p>We can use another pipe to send the output of <code>wc</code> directly to <code>sort</code>, which then sends its output to <code>head</code>:</p>
             <pre class="input"><code>$ wc -l *.pdb | sort -n | head -1</code></pre>
-            <pre class="output"><code>  9  methane.pdb</code></pre>
+            <pre class="output"><code>9  methane.pdb</code></pre>
             <p>This is exactly like a mathematician nesting functions like <em>log(3x)</em> and saying &quot;the log of three times <em>x</em>&quot;. In our case, the calculation is &quot;head of sort of line count of <code>*.pdb</code>&quot;.</p>
             <p>Here's what actually happens behind the scenes when we create a pipe. When a computer runs a program --- any program --- it creates a <strong>process</strong> in memory to hold the program's software and its current state. Every process has an input channel called <strong>standard input</strong>. (By this point, you may be surprised that the name is so memorable, but don't worry: most Unix programmers call it &quot;stdin&quot;. Every process also has a default output channel called <strong>standard output</strong> (or &quot;stdout&quot;).</p>
             <p>The shell is actually just another program. Under normal circumstances, whatever we type on the keyboard is sent to the shell on its standard input, and whatever it produces on standard output is displayed on our screen. When we tell the shell to run a program, it creates a new process and temporarily sends whatever we type on our keyboard to that process's standard input, and whatever the process sends to standard output to the screen.</p>
@@ -131,14 +131,14 @@ $ wc -l *.txt</code></pre>
 ... ...</code></pre>
             <p>Now she types this:</p>
             <pre class="input"><code>$ wc -l *.txt | sort -n | head -5</code></pre>
-<pre class="output"><code> 240 NENE02018B.txt
+<pre class="output"><code>240 NENE02018B.txt
 300 NENE01729A.txt
 300 NENE01729B.txt
 300 NENE01736A.txt
 300 NENE01751A.txt</code></pre>
             <p>Whoops: one of the files is 60 lines shorter than the others. When she goes back and checks it, she sees that she did that assay at 8:00 on a Monday morning --- someone was probably in using the machine on the weekend, and she forgot to reset it. Before re-running that sample, she checks to see if any files have too much data:</p>
             <pre class="input"><code>$ wc -l *.txt | sort -n | tail -5</code></pre>
-<pre class="output"><code> 300 NENE02040A.txt
+<pre class="output"><code>300 NENE02040A.txt
 300 NENE02040B.txt
 300 NENE02040Z.txt
 300 NENE02043A.txt
