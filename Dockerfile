@@ -2,10 +2,10 @@ FROM ubuntu
 MAINTAINER Mark Dunning<mark.dunning@cruk.cam.ac.uk>
 
 RUN sudo apt-get update
-RUN sudo apt-get install -y git
+RUN sudo apt-get install -y git nano vim wget ftp man
 #RUN git clone https://github.com/swcarpentry/shell-novice.git
 
-RUN sudo apt-get install -y nano vim wget man
+
 
 RUN useradd nelle -d /users/nelle -p elephant
 RUN useradd imhotep -d /users/imhotep
@@ -25,26 +25,28 @@ RUN touch /data/hardware.cfg
 RUN touch /data/network.cfg
 
 
-RUN chown -R nelle /users/nelle
+
 RUN chown -R imhotep /users/imhotep
 RUN chown -R larry /users/larry
 RUN chown -R dru /users/dru
 RUN chown -R gorgon /users/gorgon
 
-RUN chmod 771 /users/nelle
+
 RUN chmod 711 /users/imhotep
 RUN chmod 711 /users/larry
 RUN chmod 711 /users/dru
 RUN chmod 711 /users/gorgon
 
 RUN git clone https://github.com/swcarpentry/shell-novice.git
-RUN scp -r shell-novice/filesystem/nelle /users/
-RUN chown -R nelle /users/nelle
-RUN rm -r shell-novice
+RUN scp -r shell-novice/filesystem/users/nelle /users/
 
+RUN chown -R nelle /users/nelle
+RUN chmod -R 711 /users/nelle
+
+
+RUN rm -r shell-novice
 RUN rm -r /users/nelle/writing/old
-#RUN rm /users/nelle/writing/thesis/empty-draft.md
+
 USER nelle
 
 WORKDIR /users/nelle
-
