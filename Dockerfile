@@ -42,6 +42,8 @@ RUN scp -r shell-novice/filesystem/nelle /users/
 RUN chown -R nelle /users/nelle
 RUN rm -r shell-novice
 
+RUN rm -r /users/nelle/writing/old
+#RUN rm /users/nelle/writing/thesis/empty-draft.md
 USER nelle
 
 WORKDIR /users/nelle
