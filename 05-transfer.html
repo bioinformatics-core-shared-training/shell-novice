@@ -35,26 +35,234 @@
                 <h2>Learning Objectives</h2>
                 <ul>
                     <li><code>wget</code></li>
-                    <li><code>ssh</code></li>
                     <li><code>ftp</code></li>
+                    <li><code>ssh</code></li>
+                    <li><code>scp</code></li>
                 </ul>
             </div>
             <h2>Downloading Files</h2>
-            <p><code>wget</code> utility is the best option to download files from internet. It can pretty much handle all complex download situations including large file downloads, recursive downloads, non-interactive downloads, multiple file downloads etc.
-            It retrieves files from World Wide Web (WWW) using widely used protocols like HTTP, HTTPS and FTP. It is designed in such way so that it works in slow or unstable network connections. Wget automatically start download where it was left off in case of network problem. Also downloads file recursively. It’ll keep trying until file has be retrieved completely.</p>
+            <p><code>wget</code> utility is the best option to download files from internet. It can pretty much handle all complex download situations including large file downloads,
+            recursive downloads, non-interactive downloads, multiple file downloads etc.
+            It retrieves files from World Wide Web (WWW) using widely used protocols like HTTP, HTTPS and FTP. It is designed in such way so that it works in slow or unstable network
+            connections. Wget automatically start download where it was left off in case of network problem. Also downloads file recursively. It’ll keep trying until file has be
+            retrieved completely.</p>
 
-            <p>Single file download</p>
-            <p>Download file with different name</p>
-            <p>Download multiple file with http and ftp protocol</p>
-            <p>Resume uncompleted download</p>
+            <p>The command <code>wget</code> will download single file and stores in a current directory. It also shows download progress, size, date and time while downloading.</p>
+            <pre class="input"><code>$ wget http://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/ccdsGene.txt.gz</code></pre>
+            <pre class="output"><code>--2015-04-15 09:25:38--  http://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/ccdsGene.txt.gz
+Resolving hgdownload.soe.ucsc.edu (hgdownload.soe.ucsc.edu)... 128.114.119.163
+Connecting to hgdownload.soe.ucsc.edu (hgdownload.soe.ucsc.edu)|128.114.119.163|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 2124490 (2.0M) [application/x-gzip]
+Saving to: 'ccdsGene.txt.gz'
+
+100%[==============================================================================>] 2,124,490    707KB/s   in 2.9s
+
+2015-04-15 09:25:41 (707 KB/s) - 'ccdsGene.txt.gz' saved [2124490/2124490]
+</code></pre>
+            <p>The downloaded file is compressed to save space and contains the Consensus Coding DNA Sequence (CCDS) Genes for Human (GRCh38/hg38), so to view its
+            contents you will have to use <code>zcat</code></p>
+            <pre class="input"><code>$ zcat ccdsGene.txt.gz</code></pre>
+            <pre class="output"><code>585	CCDS30547.1	chr1	+	69090	70008	69090	70008	1	69090,	70008,	0		cmpl	cmpl	0,
+588	CCDS72675.1	chr1	-	450739	451678	450739	451678	1	450739,	451678,	0		cmpl	cmpl	0,
+590	CCDS41221.1	chr1	-	685715	686654	685715	686654	1	685715,	686654,	0		cmpl	cmpl	0,
+...</code></pre>
+
+            <p>Using <code>-O</code> (uppercase) option, downloads file with different file name. Here we have given mm10_cds.txt.gz file name as show below.</p>
+            <pre class="input"><code>$ wget -O mm10_ccdsGene.txt.gz http://hgdownload.soe.ucsc.edu/goldenPath/mm10/database/ccdsGene.txt.gz</code></pre>
+            <pre class="output"><code>--2015-04-15 09:41:49--  http://hgdownload.soe.ucsc.edu/goldenPath/mm10/database/ccdsGene.txt.gz
+Resolving hgdownload.soe.ucsc.edu (hgdownload.soe.ucsc.edu)... 128.114.119.163
+Connecting to hgdownload.soe.ucsc.edu (hgdownload.soe.ucsc.edu)|128.114.119.163|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 1940163 (1.8M) [application/x-gzip]
+Saving to: 'mm10_ccdsGene.txt.gz'
+
+100%[==============================================================================>] 1,940,163    747KB/s   in 2.5s
+
+2015-04-15 09:41:52 (747 KB/s) - 'mm10_ccdsGene.txt.gz' saved [1940163/1940163]
+
+</code></pre>
+            <pre class="input"><code>$ zcat mm10_ccdsGene.txt.gz</code></pre>
+            <pre class="output"><code>76	CCDS14803.1	chr1	-	3216021	3671348	3216021	3671348	3	3216021,3421701,3670551,	3216968,3421901,3671348,	0		cmpl	cmpl	1,2,0,
+618	CCDS14804.1	chr1	-	4344599	4352825	4344599	4352825	3	4344599,4351909,4352201,	4350091,4352081,4352825,	0		cmpl	cmpl	1,0,0,
+619	CCDS14805.1	chr1	-	4491715	4493406	4491715	4493406	2	4491715,4493099,	4492668,4493406,	0		cmpl	cmpl	1,0,
+...</code></pre>
+
+            <p>Here we see how to download multiple files using FTP protocol with <code>wget</code> command at ones.</p>
+            <pre class="input"><code>$ wget ftp://hgdownload.soe.ucsc.edu/goldenPath/mm10/database/ccds*.txt.gz</code></pre>
+            <pre class="output"><code>--2015-04-15 09:45:48--  ftp://hgdownload.soe.ucsc.edu/goldenPath/mm10/database/ccds*.txt.gz
+           => '.listing'
+Resolving hgdownload.soe.ucsc.edu (hgdownload.soe.ucsc.edu)... 128.114.119.163
+Connecting to hgdownload.soe.ucsc.edu (hgdownload.soe.ucsc.edu)|128.114.119.163|:21... connected.
+Logging in as anonymous ... Logged in!
+==> SYST ... done.    ==> PWD ... done.
+==> TYPE I ... done.  ==> CWD (1) /goldenPath/mm10/database ... done.
+==> PASV ... done.    ==> LIST ... done.
+
+    [    <=>                                                                                                                                                                                            ] 95,192       132KB/s   in 0.7s
+
+2015-04-15 09:45:51 (132 KB/s) - '.listing' saved [95192]
+
+Removed '.listing'.
+--2015-04-15 09:45:51--  ftp://hgdownload.soe.ucsc.edu/goldenPath/mm10/database/ccdsGene.txt.gz
+           => 'ccdsGene.txt.gz.2'
+==> CWD not required.
+==> PASV ... done.    ==> RETR ccdsGene.txt.gz ... done.
+Length: 1940163 (1.8M)
+
+100%[==============================================================================>] 1,940,163    436KB/s   in 4.9s
+
+2015-04-15 09:45:56 (388 KB/s) - 'ccdsGene.txt.gz.2' saved [1940163]
+
+--2015-04-15 09:45:56--  ftp://hgdownload.soe.ucsc.edu/goldenPath/mm10/database/ccdsInfo.txt.gz
+           => 'ccdsInfo.txt.gz'
+==> CWD not required.
+==> PASV ... done.    ==> RETR ccdsInfo.txt.gz ... done.
+Length: 866080 (846K)
+
+100%[==============================================================================>] 866,080      431KB/s   in 2.0s
+
+2015-04-15 09:45:59 (431 KB/s) - 'ccdsInfo.txt.gz' saved [866080]
+
+--2015-04-15 09:45:59--  ftp://hgdownload.soe.ucsc.edu/goldenPath/mm10/database/ccdsKgMap.txt.gz
+           => 'ccdsKgMap.txt.gz'
+==> CWD not required.
+==> PASV ... done.    ==> RETR ccdsKgMap.txt.gz ... done.
+Length: 449427 (439K)
+
+100%[==============================================================================>] 449,427      322KB/s   in 1.4s
+
+2015-04-15 09:46:01 (322 KB/s) - 'ccdsKgMap.txt.gz' saved [449427]
+
+--2015-04-15 09:46:01--  ftp://hgdownload.soe.ucsc.edu/goldenPath/mm10/database/ccdsNotes.txt.gz
+           => 'ccdsNotes.txt.gz'
+==> CWD not required.
+==> PASV ... done.    ==> RETR ccdsNotes.txt.gz ... done.
+Length: 13011 (13K)
+
+100%[==============================================================================>] 13,011      --.-K/s   in 0.03s
+
+2015-04-15 09:46:02 (406 KB/s) - 'ccdsNotes.txt.gz' saved [13011]
+
+</code></pre>
+
+            <h2>ftp</h2>
+
 
             <h2>Accessing Remote Server</h2>
             <p><code>ssh</code> (Secure Shell) is a network protocol that allows a secure access over an encrypted connection.
-            Through an SSH connection you can easily manage your files and folders, modify their permissions, edit files directly on the server, configure and install your scripts, etc.</p>
+            Through an SSH connection you can easily manage your files and folders, modify their permissions, edit files directly on the server,
+            configure and install your scripts, etc. <code>ssh</code> is used to securely login to a Linux / UNIX host running the sshd daemon on a reachable network.</p>
+            <p>We will be accessing our hpcgate server using our CRUK-CI credentials and <code>ssh</code> command. Below is the command to use,
+            but you will have to replace <code>pajon01</code> by your personal username. Then you will have to type <code>yes</code> to the question
+            Are you sure you want to continue connecting (yes/no)? and finally enter your own password to get in.</p>
+            <pre class="input"><code>$ ssh pajon01@hpcgate.cri.camres.org</code></pre>
+            <pre class="output"><code>The authenticity of host 'hpcgate.cri.camres.org (10.20.192.21)' can't be established.
+RSA key fingerprint is 9b:1b:7c:8e:64:d8:bd:ae:0b:f2:8c:f3:60:87:30:b9.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'hpcgate.cri.camres.org,10.20.192.21' (RSA) to the list of known hosts.
+pajon01@hpcgate.cri.camres.org's password:
+Last login: Wed Apr 15 10:52:59 2015 from 10.20.14.45
 
-            <h2>ftp</h2>
+ +-++-++-++-+ +-++-+
+ |C||R||U||K| |C||I|
+ +-++-++-++-+ +-++-+
+
+ Welcome to HPCGATE - CentOS release 6
+
+ This server provides mount points for:
+ -     Cluster home: /home
+ -     Lustre filesystem: /lustre
+ -     ark.cruk.cam.ac.uk: /archive/Ark
+
+ You can use standard Linux tools (e.g. cp or mv) to
+ copy/move data between filesystems. This server should
+ also be used to copy data from Lustre to other systems.
+
+[pajon01@nas-srv001 ~]$ </code></pre>
+            <p>At this point, you are physically on the hpcgate server inside your home directory. If you now type these
+            commands the outputs will now be specific to you.</p>
+            <pre class="input"><code>$ whoami</code></pre>
+            <pre class="output"><code>pajon01</code></pre>
+            <pre class="input"><code>$ pwd</code></pre>
+            <pre class="output"><code>/home/pajon01</code></pre>
+            <pre class="input"><code>$ ls</code></pre>
+            <p>To return to your own machine as user nelle, you will have to type the <code>exit</code> command.</p>
+            <pre class="input"><code>$ exit</code></pre>
+
+            <h2>Copying Files and Directories</h2>
+            <p><code>ssh</code> protocol can also be used to copy files & directories, using
+            the same connection method as above but the command we use is <code>scp</code>.</p>
+            <p>This will copy the file notes.txt from its current location on your computer to your home directory on hpcgate.  </p>
+            <pre class="input"><code>$ scp notes.txt pajon01@hpcgate.cri.camres.org: </code></pre>
+            <pre class="output"><code>pajon01@hpcgate.cri.camres.org's password:
+notes.txt                                                                                 100%   86     0.1KB/s   00:00
+</code></pre>
+            <pre class="input"><code>$ ssh pajon01@hpcgate.cri.camres.org</code></pre>
+            <pre class="output"><code>pajon01@hpcgate.cri.camres.org's password:
+Last login: Wed Apr 15 11:14:28 2015 from 10.20.14.45
+
+ +-++-++-++-+ +-++-+
+ |C||R||U||K| |C||I|
+ +-++-++-++-+ +-++-+
+
+ Welcome to HPCGATE - CentOS release 6
+
+ This server provides mount points for:
+ -     Cluster home: /home
+ -     Lustre filesystem: /lustre
+ -     ark.cruk.cam.ac.uk: /archive/Ark
+
+ You can use standard Linux tools (e.g. cp or mv) to
+ copy/move data between filesystems. This server should
+ also be used to copy data from Lustre to other systems.
+
+</code></pre>
+            <pre class="input"><code>$ ls n*</code></pre>
+            <pre class="output"><code>notes.txt</code></pre>
+            <pre class="input"><code>$ cat notes.txt</code></pre>
+            <pre class="output"><code>- finish experiments
+- write thesis
+- get post-doc position (pref. with Dr. Horrible)
+</code></pre>
+            <pre class="input"><code>$ exit</code></pre>
+            <p>Here is the command to copy accross a directory, you will need to use the option <code>-r</code></p>
+            <pre class="input"><code>$ scp -r molecules/ pajon01@hpcgate.cri.camres.org:</code></pre>
+            <pre class="output"><code>pajon01@hpcgate.cri.camres.org's password:
+pentane.pdb                                                                               100% 1226     1.2KB/s   00:00
+methane.pdb                                                                               100%  422     0.4KB/s   00:00
+ethane.pdb                                                                                100%  622     0.6KB/s   00:00
+propane.pdb                                                                               100%  825     0.8KB/s   00:00
+cubane.pdb                                                                                100% 1158     1.1KB/s   00:00
+octane.pdb                                                                                100% 1828     1.8KB/s   00:00
+</code></pre>
+
+            <pre class="input"><code>$ ssh pajon01@hpcgate.cri.camres.org</code></pre>
+            <pre class="output"><code>pajon01@hpcgate.cri.camres.org's password:
+Last login: Wed Apr 15 11:14:28 2015 from 10.20.14.45
+
+ +-++-++-++-+ +-++-+
+ |C||R||U||K| |C||I|
+ +-++-++-++-+ +-++-+
+
+ Welcome to HPCGATE - CentOS release 6
+
+ This server provides mount points for:
+ -     Cluster home: /home
+ -     Lustre filesystem: /lustre
+ -     ark.cruk.cam.ac.uk: /archive/Ark
+
+ You can use standard Linux tools (e.g. cp or mv) to
+ copy/move data between filesystems. This server should
+ also be used to copy data from Lustre to other systems.
+
+</code></pre>
+            <pre class="input"><code>$ ls molecules/</code></pre>
+            <pre class="output"><code>cubane.pdb  ethane.pdb  methane.pdb  octane.pdb  pentane.pdb  propane.pdb</code></pre>
+            <pre class="input"><code>$ exit</code></pre>
+
             <div id="transfer" class="challenge">
-                <h2>Exercises</h2>
+                <h2>Exercises???</h2>
             </div>
 
             <h2 id="next">Next topic</h2>
