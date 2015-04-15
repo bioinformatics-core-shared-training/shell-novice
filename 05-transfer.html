@@ -34,20 +34,22 @@
             <div id="learning-objectives" class="objectives">
                 <h2>Learning Objectives</h2>
                 <ul>
-                    <li><code>wget</code></li>
-                    <li><code>ftp</code></li>
-                    <li><code>ssh</code></li>
-                    <li><code>scp</code></li>
+                    <li>Use <code>wget</code> to download files from the internet.</li>
+                    <li>Use <code>ssh</code> to connect to remote servers.</li>
+                    <li>Use <code>scp</code> to copy files and directories onto a remote server.</li>
                 </ul>
             </div>
             <h2>Downloading Files</h2>
-            <p>The <code>wget</code> utility is the best option to download files from the internet. It can pretty much handle all complex download situations including large file downloads,
+            <p>The <code>wget</code> utility is the best option to download files from the internet. It can pretty much
+            handle all complex download situations including large file downloads,
             recursive downloads, non-interactive downloads, multiple file downloads etc.
-            It retrieves files from World Wide Web (WWW) using widely used protocols like HTTP, HTTPS and FTP, and is designed in such way so that it works in slow or unstable network
-            connections. Wget can automatically re-start a download where it was left off in case of network problem. Also downloads file recursively and will keep trying until file has be
-            retrieved completely.</p>
+            It retrieves files from World Wide Web (WWW) using widely used protocols like HTTP, HTTPS and FTP, and is
+            designed in such way so that it works in slow or unstable network
+            connections. Wget can automatically re-start a download where it was left off in case of network problem.
+            Also downloads file recursively and will keep trying until file has be retrieved completely.</p>
 
-            <p>The command <code>wget</code> will download a single file and stores it in the current directory. It shows download progress, size, date and time while downloading.</p>
+            <p>The command <code>wget</code> will download a single file and stores it in the current directory.
+            It shows download progress, size, date and time while downloading.</p>
             <pre class="input"><code>$ wget http://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/ccdsGene.txt.gz</code></pre>
             <pre class="output"><code>--2015-04-15 09:25:38--  http://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/ccdsGene.txt.gz
 Resolving hgdownload.soe.ucsc.edu (hgdownload.soe.ucsc.edu)... 128.114.119.163
@@ -60,15 +62,17 @@ Saving to: 'ccdsGene.txt.gz'
 
 2015-04-15 09:25:41 (707 KB/s) - 'ccdsGene.txt.gz' saved [2124490/2124490]
 </code></pre>
-            <p>The downloaded file is compressed to save space and contains the Consensus Coding DNA Sequence (CCDS) Genes for Human (GRCh38/hg38), so to view its
-            contents you will have to use <code>zcat</code></p>
+            <p>The downloaded file is compressed to save space and contains the Consensus Coding DNA Sequence (CCDS)
+            Genes for Human (GRCh38/hg38), so to view its contents you will have to use <code>zcat</code>.</p>
             <pre class="input"><code>$ zcat ccdsGene.txt.gz</code></pre>
             <pre class="output"><code>585	CCDS30547.1	chr1	+	69090	70008	69090	70008	1	69090,	70008,	0		cmpl	cmpl	0,
 588	CCDS72675.1	chr1	-	450739	451678	450739	451678	1	450739,	451678,	0		cmpl	cmpl	0,
 590	CCDS41221.1	chr1	-	685715	686654	685715	686654	1	685715,	686654,	0		cmpl	cmpl	0,
 ...</code></pre>
 
-            <p>Unless you specify otherwise, the file created in your current directory will have the same name as the file you are downloading. Using <code>-O</code> (uppercase letter 'O') option creates a file with a specified name. Here we have given mm10_cds.txt.gz file name as show below.</p>
+            <p>Unless you specify otherwise, the file created in your current directory will have the same name as the
+            file you are downloading. Using <code>-O</code> (uppercase letter 'O') option creates a file with a specified
+            name. Here we have given mm10_cds.txt.gz file name as show below.</p>
             <pre class="input"><code>$ wget -O mm10_ccdsGene.txt.gz http://hgdownload.soe.ucsc.edu/goldenPath/mm10/database/ccdsGene.txt.gz</code></pre>
             <pre class="output"><code>--2015-04-15 09:41:49--  http://hgdownload.soe.ucsc.edu/goldenPath/mm10/database/ccdsGene.txt.gz
 Resolving hgdownload.soe.ucsc.edu (hgdownload.soe.ucsc.edu)... 128.114.119.163
@@ -82,13 +86,16 @@ Saving to: 'mm10_ccdsGene.txt.gz'
 2015-04-15 09:41:52 (747 KB/s) - 'mm10_ccdsGene.txt.gz' saved [1940163/1940163]
 
 </code></pre>
+            <p>Once again, the downloaded file is compressed. It contains the Consensus Coding DNA Sequence (CCDS)
+            Genes for Mouse (GRCm38/mm10), so to view its contents you will have to use <code>zcat</code>.</p>
             <pre class="input"><code>$ zcat mm10_ccdsGene.txt.gz</code></pre>
             <pre class="output"><code>76	CCDS14803.1	chr1	-	3216021	3671348	3216021	3671348	3	3216021,3421701,3670551,	3216968,3421901,3671348,	0		cmpl	cmpl	1,2,0,
 618	CCDS14804.1	chr1	-	4344599	4352825	4344599	4352825	3	4344599,4351909,4352201,	4350091,4352081,4352825,	0		cmpl	cmpl	1,0,0,
 619	CCDS14805.1	chr1	-	4491715	4493406	4491715	4493406	2	4491715,4493099,	4492668,4493406,	0		cmpl	cmpl	1,0,
 ...</code></pre>
 
-            <p>Here we see how to download multiple files using the FTP protocol with <code>wget</code>.</p>
+            <p>Here we see how to download multiple files using the FTP protocol and <code>wget</code>.
+            It is the recommended method when downloading a large file or multiple files.</p>
             <pre class="input"><code>$ wget ftp://hgdownload.soe.ucsc.edu/goldenPath/mm10/database/ccds*.txt.gz</code></pre>
             <pre class="output"><code>--2015-04-15 09:45:48--  ftp://hgdownload.soe.ucsc.edu/goldenPath/mm10/database/ccds*.txt.gz
            => '.listing'
@@ -153,18 +160,17 @@ Length: 13011 (13K)
             <a href="ftp://hgdownload.soe.ucsc.edu/">ftp://hgdownload.soe.ucsc.edu/</a> using <code>wget</code>.</p>
             <p>An FTP address looks a lot like an HTTP, or Website, address except it uses the prefix ftp:// instead of http://.
             To make an FTP connection you can use a standard Web browser (Internet Explorer, Firefox, etc.) or
-            a dedicated FTP software program, referred to as an FTP ‘Client’, or the command line tool <code>ftp</code>.
-            When using a Web browser for an FTP connection, FTP uploads are difficult, or sometimes impossible, and downloads are not protected
-            (not recommended for uploading or downloading large files).</p>
+            a dedicated FTP software program, referred to as an FTP ‘Client’, or use the command line tool <code>ftp</code>.
+            </p>
 
 
             <h2>Accessing Remote Server</h2>
             <p><code>ssh</code> (Secure Shell) is a network protocol that allows a secure access over an encrypted connection.
             Through an SSH connection you can easily manage your files and folders, modify their permissions, edit files directly on the server,
             configure and install your scripts, etc. <code>ssh</code> is used to securely login to a Linux / UNIX host running the sshd daemon on a reachable network.</p>
-            <p>We will be accessing our hpcgate server using our CRUK-CI credentials and <code>ssh</code> command. Below is the command to use,
+            <p>We will be accessing our hpcgate server using our own CRUK-CI credentials and <code>ssh</code> command. Below is the command to use,
             but you will have to replace <code>pajon01</code> by your personal username. Then you will have to type <code>yes</code> to the question
-            Are you sure you want to continue connecting (yes/no)? and finally enter your own password to get in.</p>
+            'Are you sure you want to continue connecting (yes/no)?' and finally enter your own password to be able to log in.</p>
             <pre class="input"><code>$ ssh pajon01@hpcgate.cri.camres.org</code></pre>
             <pre class="output"><code>The authenticity of host 'hpcgate.cri.camres.org (10.20.192.21)' can't be established.
 RSA key fingerprint is 9b:1b:7c:8e:64:d8:bd:ae:0b:f2:8c:f3:60:87:30:b9.
@@ -202,11 +208,15 @@ Last login: Wed Apr 15 10:52:59 2015 from 10.20.14.45
             <h2>Copying Files and Directories</h2>
             <p><code>ssh</code> protocol can also be used to copy files & directories, using
             the same connection method as above but the command we use is <code>scp</code>.</p>
-            <p>This will copy the file notes.txt from its current location on your computer to your home directory on hpcgate. Again, remember to replace <code>pajon01</code> with your own username</p>
+            <p>This will copy the file notes.txt from its current location on your computer to your home directory
+            on hpcgate. Again, remember to replace <code>pajon01</code> with your own username.</p>
             <pre class="input"><code>$ scp notes.txt pajon01@hpcgate.cri.camres.org: </code></pre>
             <pre class="output"><code>pajon01@hpcgate.cri.camres.org's password:
 notes.txt                                                                                 100%   86     0.1KB/s   00:00
 </code></pre>
+            <p>Similarly to the <code>wget</code> command, it shows upload progress, size, speed and time while uploading.
+            It displays a 100% when the file is copied.</p>
+            <p>Let's now connect to our hpcgate to check that the file has really been copied.</p>
             <pre class="input"><code>$ ssh pajon01@hpcgate.cri.camres.org</code></pre>
             <pre class="output"><code>pajon01@hpcgate.cri.camres.org's password:
 Last login: Wed Apr 15 11:14:28 2015 from 10.20.14.45
@@ -235,7 +245,10 @@ Last login: Wed Apr 15 11:14:28 2015 from 10.20.14.45
 - get post-doc position (pref. with Dr. Horrible)
 </code></pre>
             <pre class="input"><code>$ exit</code></pre>
-            <p>Here is the command to copy accross a directory, you will need to use the option <code>-r</code></p>
+            <p>Now we are going to copy an entire directory into your home directory on hpcgate.
+            Here is the command to copy across a directory,
+            you will need to use the option <code>-r</code> of the <code>scp</code> command.
+            To know more about a command, you can always type <code>man scp</code>.</p>
             <pre class="input"><code>$ scp -r molecules/ pajon01@hpcgate.cri.camres.org:</code></pre>
             <pre class="output"><code>pajon01@hpcgate.cri.camres.org's password:
 pentane.pdb                                                                               100% 1226     1.2KB/s   00:00
@@ -246,6 +259,8 @@ cubane.pdb                                                                      
 octane.pdb                                                                                100% 1828     1.8KB/s   00:00
 </code></pre>
 
+            <p>These files are pretty small, so they have been copied very quickly. Let's now check that they are
+            actually on our remote server hpcgate.</p>
             <pre class="input"><code>$ ssh pajon01@hpcgate.cri.camres.org</code></pre>
             <pre class="output"><code>pajon01@hpcgate.cri.camres.org's password:
 Last login: Wed Apr 15 11:14:28 2015 from 10.20.14.45
@@ -270,8 +285,23 @@ Last login: Wed Apr 15 11:14:28 2015 from 10.20.14.45
             <pre class="output"><code>cubane.pdb  ethane.pdb  methane.pdb  octane.pdb  pentane.pdb  propane.pdb</code></pre>
             <pre class="input"><code>$ exit</code></pre>
 
-            <div id="transfer" class="challenge">
-                <h2>Exercises???</h2>
+            <p>The scp command can be used in three* ways: to copy from your computer to a (remote) server as we've just done,
+            to copy from a (remote) server to your computer, and to copy from a (remote) server to another (remote) server.
+            In the third case, the data is transferred directly between the servers; your own computer will only
+            tell the servers what to do. </p>
+            <p><i>*: Actually you can also use it just like the normal cp command, without any ssh connections in it,
+            but that’s quite useless. It requires you to type an extra ‘s’!</i></p>
+
+            <div id="exploring-wget" class="challenge">
+                <h2>Exploring more <code>wget</code></h2>
+            </div>
+
+            <div id="exploring-ssh" class="challenge">
+                <h2>Exploring more <code>ssh</code></h2>
+            </div>
+
+            <div id="exploring-scp" class="challenge">
+                <h2>Exploring more <code>scp</code></h2>
             </div>
 
             <h2 id="next">Next topic</h2>
