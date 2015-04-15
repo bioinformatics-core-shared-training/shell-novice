@@ -41,13 +41,13 @@
                 </ul>
             </div>
             <h2>Downloading Files</h2>
-            <p><code>wget</code> utility is the best option to download files from internet. It can pretty much handle all complex download situations including large file downloads,
+            <p>The <code>wget</code> utility is the best option to download files from the internet. It can pretty much handle all complex download situations including large file downloads,
             recursive downloads, non-interactive downloads, multiple file downloads etc.
-            It retrieves files from World Wide Web (WWW) using widely used protocols like HTTP, HTTPS and FTP. It is designed in such way so that it works in slow or unstable network
-            connections. Wget automatically start download where it was left off in case of network problem. Also downloads file recursively. It’ll keep trying until file has be
+            It retrieves files from World Wide Web (WWW) using widely used protocols like HTTP, HTTPS and FTP, and is designed in such way so that it works in slow or unstable network
+            connections. Wget can automatically re-start a download where it was left off in case of network problem. Also downloads file recursively and will keep trying until file has be
             retrieved completely.</p>
 
-            <p>The command <code>wget</code> will download single file and stores in a current directory. It also shows download progress, size, date and time while downloading.</p>
+            <p>The command <code>wget</code> will download a single file and stores it in the current directory. It shows download progress, size, date and time while downloading.</p>
             <pre class="input"><code>$ wget http://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/ccdsGene.txt.gz</code></pre>
             <pre class="output"><code>--2015-04-15 09:25:38--  http://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/ccdsGene.txt.gz
 Resolving hgdownload.soe.ucsc.edu (hgdownload.soe.ucsc.edu)... 128.114.119.163
@@ -88,7 +88,7 @@ Saving to: 'mm10_ccdsGene.txt.gz'
 619	CCDS14805.1	chr1	-	4491715	4493406	4491715	4493406	2	4491715,4493099,	4492668,4493406,	0		cmpl	cmpl	1,0,
 ...</code></pre>
 
-            <p>Here we see how to download multiple files using FTP protocol with <code>wget</code> command at ones.</p>
+            <p>Here we see how to download multiple files using the FTP protocol with <code>wget</code>.</p>
             <pre class="input"><code>$ wget ftp://hgdownload.soe.ucsc.edu/goldenPath/mm10/database/ccds*.txt.gz</code></pre>
             <pre class="output"><code>--2015-04-15 09:45:48--  ftp://hgdownload.soe.ucsc.edu/goldenPath/mm10/database/ccds*.txt.gz
            => '.listing'
@@ -193,7 +193,7 @@ Last login: Wed Apr 15 10:52:59 2015 from 10.20.14.45
             <h2>Copying Files and Directories</h2>
             <p><code>ssh</code> protocol can also be used to copy files & directories, using
             the same connection method as above but the command we use is <code>scp</code>.</p>
-            <p>This will copy the file notes.txt from its current location on your computer to your home directory on hpcgate.  </p>
+            <p>This will copy the file notes.txt from its current location on your computer to your home directory on hpcgate. Again, remember to replace <code>pajon01</code> with your own username</p>
             <pre class="input"><code>$ scp notes.txt pajon01@hpcgate.cri.camres.org: </code></pre>
             <pre class="output"><code>pajon01@hpcgate.cri.camres.org's password:
 notes.txt                                                                                 100%   86     0.1KB/s   00:00
