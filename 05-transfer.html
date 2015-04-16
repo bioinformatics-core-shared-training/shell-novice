@@ -160,7 +160,7 @@ Length: 13011 (13K)
             <a href="ftp://hgdownload.soe.ucsc.edu/">ftp://hgdownload.soe.ucsc.edu/</a> using <code>wget</code>.</p>
             <p>An FTP address looks a lot like an HTTP, or Website, address except it uses the prefix ftp:// instead of http://.
             To make an FTP connection you can use a standard Web browser (Internet Explorer, Firefox, etc.) or
-            a dedicated FTP software program, referred to as an FTP ‘Client’, or use the command line tool <code>ftp</code>.
+            a dedicated FTP software program (e.g. WinSCP on Windows or CyberDuck on Mac), referred to as an FTP ‘Client’, or use the command line tool <code>ftp</code>.
             </p>
 
 
@@ -195,20 +195,20 @@ Last login: Wed Apr 15 10:52:59 2015 from 10.20.14.45
  also be used to copy data from Lustre to other systems.
 
 [pajon01@nas-srv001 ~]$ </code></pre>
-            <p>At this point, you are physically on the hpcgate server inside your home directory. If you now type these
+            <p>At this point, you are physically on the hpcgate server inside your home directory. The directory structure is now completely different to before and you can no-longer access the files within nelle's file system. However, you can still use the same commands you have seen already. If you now type these
             commands the outputs will now be specific to you.</p>
             <pre class="input"><code>$ whoami</code></pre>
             <pre class="output"><code>pajon01</code></pre>
             <pre class="input"><code>$ pwd</code></pre>
             <pre class="output"><code>/home/pajon01</code></pre>
             <pre class="input"><code>$ ls</code></pre>
-            <p>To return to your own machine as user nelle, you will have to type the <code>exit</code> command.</p>
+            <p>To return to docker as user nelle, you will have to type the <code>exit</code> command.</p>
             <pre class="input"><code>$ exit</code></pre>
 
             <h2>Copying Files and Directories</h2>
             <p><code>ssh</code> protocol can also be used to copy files & directories, using
             the same connection method as above but the command we use is <code>scp</code>.</p>
-            <p>This will copy the file notes.txt from its current location on your computer to your home directory
+            <p>This will copy the file notes.txt from its current location within nelle's file system to your home directory
             on hpcgate. Again, remember to replace <code>pajon01</code> with your own username.</p>
             <pre class="input"><code>$ scp notes.txt pajon01@hpcgate.cri.camres.org: </code></pre>
             <pre class="output"><code>pajon01@hpcgate.cri.camres.org's password:
