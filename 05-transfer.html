@@ -94,6 +94,37 @@ Saving to: 'mm10_ccdsGene.txt.gz'
 619	CCDS14805.1	chr1	-	4491715	4493406	4491715	4493406	2	4491715,4493099,	4492668,4493406,	0		cmpl	cmpl	1,0,
 ...</code></pre>
 
+            <p>It is possible to continue an incomplete download using <code>wget -c</code>.
+            This is very helpful when you have initiated a very big file download which got interrupted in the
+            middle. Instead of starting the whole download again, you can start the download from where it got
+            interrupted using the option <code>-c</code>.</p>
+            <p>Here is an example of downloading a file which got interrupted manually by using Ctrl-C command on the keyboard.</p>
+            <pre class="input"><code>$ wget http://hgdownload.cse.ucsc.edu/goldenPath/eriEur2/database/cds.txt.gz</code></pre>
+            <pre class="output"><code>--2015-04-17 09:40:23--  http://hgdownload.cse.ucsc.edu/goldenPath/eriEur2/database/cds.txt.gz
+Resolving hgdownload.cse.ucsc.edu (hgdownload.cse.ucsc.edu)... 128.114.119.163
+Connecting to hgdownload.cse.ucsc.edu (hgdownload.cse.ucsc.edu)|128.114.119.163|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 1955793 (1.9M) [application/x-gzip]
+Saving to: 'cds.txt.gz'
+
+52% [========================================>                                      ] 1,022,856    551KB/s             ^C
+</code></pre>
+            <p>To continue the download instead of restarting it, you can use the option <code>-c</code>, the download
+            of the file will then restart where it did stop, as shown bellow.</p>
+            <pre class="input"><code>$ wget -c http://hgdownload.cse.ucsc.edu/goldenPath/eriEur2/database/cds.txt.gz</code></pre>
+            <pre class="output"><code>--2015-04-17 09:40:33--  http://hgdownload.cse.ucsc.edu/goldenPath/eriEur2/database/cds.txt.gz
+Resolving hgdownload.cse.ucsc.edu (hgdownload.cse.ucsc.edu)... 128.114.119.163
+Connecting to hgdownload.cse.ucsc.edu (hgdownload.cse.ucsc.edu)|128.114.119.163|:80... connected.
+HTTP request sent, awaiting response... 206 Partial Content
+Length: 1955793 (1.9M), 819497 (800K) remaining [application/x-gzip]
+Saving to: 'cds.txt.gz'
+
+100%[+++++++++++++++++++++++++++++++++++++++++++++=================================>] 1,955,793    521KB/s   in 1.5s
+
+2015-04-17 09:40:35 (521 KB/s) - 'cds.txt.gz' saved [1955793/1955793]
+
+</code></pre>
+
             <p>Here we see how to download multiple files using the FTP protocol and <code>wget</code>.
             It is the recommended method when downloading a large file or multiple files.</p>
             <pre class="input"><code>$ wget ftp://hgdownload.soe.ucsc.edu/goldenPath/mm10/database/ccds*.txt.gz</code></pre>
@@ -293,15 +324,24 @@ Last login: Wed Apr 15 11:14:28 2015 from 10.20.14.45
             but that’s quite useless. It requires you to type an extra ‘s’!</i></p>
 
             <div id="exploring-wget" class="challenge">
-                <h2>Exploring more <code>wget</code></h2>
+                <h2>Exploring more <code>wget</code> Arguments</h2>
+                <p>Describe in words what the following command does knowing that the file download-file-list.txt
+                contains this list of urls</p>
+                <pre><code>$ cat download-file-list.txt
+http://hgdownload.cse.ucsc.edu/goldenPath/felCat5/database/cds.txt.gz
+http://hgdownload.cse.ucsc.edu/goldenPath/canFam3/database/cds.txt.gz
+http://hgdownload.cse.ucsc.edu/goldenPath/oryCun2/database/cds.txt.gz</code></pre>
+                <pre><code>$ wget -i download-file-list.txt</code></pre>
             </div>
 
             <div id="exploring-ssh" class="challenge">
-                <h2>Exploring more <code>ssh</code></h2>
+                <h2>Listing Directories and Files on Remote Host</h2>
+                <p>Explain which commands will you use to explore the directory <code>/archive</code> on the hpcgate.</p>
             </div>
 
             <div id="exploring-scp" class="challenge">
-                <h2>Exploring more <code>scp</code></h2>
+                <h2>Exploring more <code>scp</code> Command</h2>
+                <p>Explain how to copy the remote file notes.txt on hpcgate from your home directory into a new directory called remote/ on your local machine.</p>
             </div>
 
             <h2 id="next">Next topic</h2>
