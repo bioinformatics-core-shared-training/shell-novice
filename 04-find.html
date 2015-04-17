@@ -229,7 +229,7 @@ Software is like that.</code></pre>
                 <pre class="input"><code>find . -name &#39;*.dat&#39; | wc -l | sort -n</code></pre>
             </div>
             <div id="matching" class="challenge">
-                <h2>Matching <code>ose.dat</code> but not <code class="challenge">temp</code></h2>
+                <h2>Matching <code>ose.dat</code> but not <code>temp</code></h2>
                 <p>The <code>-v</code> flag to <code>grep</code> inverts pattern matching, so that only lines which do <em>not</em> match the pattern are printed. Given that, which of the following commands will find all files in <code>/data</code> whose names end in <code>ose.dat</code> (e.g., <code>sucrose.dat</code> or <code>maltose.dat</code>), but do <em>not</em> contain the word <code>temp</code>?</p>
                 <ol style="list-style-type: decimal">
                     <li><p><code>find /data -name '*.dat' | grep ose | grep -v temp</code></p></li>
