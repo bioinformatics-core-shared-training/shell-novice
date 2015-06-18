@@ -80,4 +80,11 @@ rm -rf Documents/ Downloads/ Music/ Pictures/ Templates/ Videos/
 
 # Add extra keyboard layouts
 # Add Firefox and Terminal on Desktop
-# Add bookmark to course materials and slides
+# Add bookmark to course materials and slides in Firefox
+# Remove link to deleted folders like Downloads, etc...
+# Change download directory in Firefox
+xdg-user-dires-update
+
+### After testing course materials, re-set course structure using this command:
+sudo su -
+rsync -avr --delete --exclude '.*' --exclude 'Desktop' shell-novice/filesystem/nelle /users/
