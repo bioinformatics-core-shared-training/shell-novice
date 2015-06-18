@@ -202,6 +202,9 @@ Length: 13011 (13K)
             <p>We will be accessing a training server using our own CRUK-CI credentials and <code>ssh</code> command. Below is the command to use,
             but you will have to replace <code>pajon01</code> by your personal username. Then you will have to type <code>yes</code> to the question
             'Are you sure you want to continue connecting (yes/no)?' and finally enter your own password to be able to log in.</p>
+            <p>If you do not have a CRUK-CI account, you can still do these following steps but you have to use another server when connected to our REDROOM wireless
+            called by its IP address 10.20.208.208 using this command: <code>ssh training1@10.20.208.208</code> instead of the one bellow. We have created 30 accounts from training1 to training30
+            with their passwords matching the account name.</p>
             <pre class="input"><code>$ ssh pajon01@training.cri.camres.org</code></pre>
             <pre class="output"><code>﻿The authenticity of host 'training.cri.camres.org (10.20.128.245)' can't be established.
 RSA key fingerprint is 3f:bc:6d:9f:2a:15:b8:6f:91:ec:cc:ef:a9:44:ab:11.
