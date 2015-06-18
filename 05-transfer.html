@@ -199,73 +199,59 @@ Length: 13011 (13K)
             <p><code>ssh</code> (Secure Shell) is a network protocol that allows a secure access over an encrypted connection.
             Through an SSH connection you can easily manage your files and folders, modify their permissions, edit files directly on the server,
             configure and install your scripts, etc. <code>ssh</code> is used to securely login to a Linux / UNIX host running the sshd daemon on a reachable network.</p>
-            <p>We will be accessing our hpcgate server using our own CRUK-CI credentials and <code>ssh</code> command. Below is the command to use,
+            <p>We will be accessing a training server using our own CRUK-CI credentials and <code>ssh</code> command. Below is the command to use,
             but you will have to replace <code>pajon01</code> by your personal username. Then you will have to type <code>yes</code> to the question
             'Are you sure you want to continue connecting (yes/no)?' and finally enter your own password to be able to log in.</p>
-            <pre class="input"><code>$ ssh pajon01@hpcgate.cri.camres.org</code></pre>
-            <pre class="output"><code>The authenticity of host 'hpcgate.cri.camres.org (10.20.192.21)' can't be established.
-RSA key fingerprint is 9b:1b:7c:8e:64:d8:bd:ae:0b:f2:8c:f3:60:87:30:b9.
+            <pre class="input"><code>$ ssh pajon01@training.cri.camres.org</code></pre>
+            <pre class="output"><code>﻿The authenticity of host 'training.cri.camres.org (10.20.128.245)' can't be established.
+RSA key fingerprint is 3f:bc:6d:9f:2a:15:b8:6f:91:ec:cc:ef:a9:44:ab:11.
 Are you sure you want to continue connecting (yes/no)? yes
-Warning: Permanently added 'hpcgate.cri.camres.org,10.20.192.21' (RSA) to the list of known hosts.
-pajon01@hpcgate.cri.camres.org's password:
-Last login: Wed Apr 15 10:52:59 2015 from 10.20.14.45
+Warning: Permanently added 'training.cri.camres.org,10.20.128.245' (RSA) to the list of known hosts.
+pajon01@training.cri.camres.org's password:
+Last login: Thu Jun 18 04:36:15 2015 from 10.20.14.45
 
  +-++-++-++-+ +-++-+
  |C||R||U||K| |C||I|
  +-++-++-++-+ +-++-+
 
- Welcome to HPCGATE - CentOS release 6
+ Welcome to training - CentOS release 6
 
- This server provides mount points for:
- -     Cluster home: /home
- -     Lustre filesystem: /lustre
- -     ark.cruk.cam.ac.uk: /archive/Ark
-
- You can use standard Linux tools (e.g. cp or mv) to
- copy/move data between filesystems. This server should
- also be used to copy data from Lustre to other systems.
-
-[pajon01@nas-srv001 ~]$ </code></pre>
-            <p>At this point, you are physically on the hpcgate server inside your home directory. The directory structure is now completely different to before and you can no-longer access the files within nelle's file system. However, you can still use the same commands you have seen already. If you now type these
+﻿[pajon01@training ~]$</code></pre>
+            <p>At this point, you are physically on the training server inside your home directory. The directory structure is now completely different to the one you had before and you can no-longer access the files within nelle's file system. However, you can still use the same commands you have seen already. If you now type these
             commands the outputs will now be specific to you.</p>
             <pre class="input"><code>$ whoami</code></pre>
             <pre class="output"><code>pajon01</code></pre>
             <pre class="input"><code>$ pwd</code></pre>
             <pre class="output"><code>/home/pajon01</code></pre>
             <pre class="input"><code>$ ls</code></pre>
-            <p>To return to docker as user nelle, you will have to type the <code>exit</code> command.</p>
+            <p>To return to our own computer as user nelle, you will have to type the <code>exit</code> command.</p>
             <pre class="input"><code>$ exit</code></pre>
+            <pre class="output"><code>﻿logout
+Connection to training.cri.camres.org closed.
+</code></pre>
 
             <h2>Copying Files and Directories</h2>
             <p><code>ssh</code> protocol can also be used to copy files & directories, using
             the same connection method as above but the command we use is <code>scp</code>.</p>
             <p>This will copy the file notes.txt from its current location within nelle's file system to your home directory
-            on hpcgate. Again, remember to replace <code>pajon01</code> with your own username.</p>
-            <pre class="input"><code>$ scp notes.txt pajon01@hpcgate.cri.camres.org: </code></pre>
-            <pre class="output"><code>pajon01@hpcgate.cri.camres.org's password:
+            on training. Again, remember to replace <code>pajon01</code> with your own username.</p>
+            <pre class="input"><code>$ ﻿scp notes.txt pajon01@training.cri.camres.org:.</code></pre>
+            <p>Do not forget the trailing characters <code>:.</code></p>
+            <pre class="output"><code>﻿pajon01@training.cri.camres.org's password:
 notes.txt                                                                                 100%   86     0.1KB/s   00:00
 </code></pre>
             <p>Similarly to the <code>wget</code> command, it shows upload progress, size, speed and time while uploading.
             It displays a 100% when the file is copied.</p>
-            <p>Let's now connect to our hpcgate to check that the file has really been copied.</p>
-            <pre class="input"><code>$ ssh pajon01@hpcgate.cri.camres.org</code></pre>
-            <pre class="output"><code>pajon01@hpcgate.cri.camres.org's password:
-Last login: Wed Apr 15 11:14:28 2015 from 10.20.14.45
+            <p>Let's now connect to the training server to check that the file has really been copied.</p>
+            <pre class="input"><code>$ ssh pajon01@training.cri.camres.org</code></pre>
+            <pre class="output"><code>﻿pajon01@training.cri.camres.org's password:
+Last login: Thu Jun 18 05:13:23 2015 from 10.20.14.45
 
  +-++-++-++-+ +-++-+
  |C||R||U||K| |C||I|
  +-++-++-++-+ +-++-+
 
- Welcome to HPCGATE - CentOS release 6
-
- This server provides mount points for:
- -     Cluster home: /home
- -     Lustre filesystem: /lustre
- -     ark.cruk.cam.ac.uk: /archive/Ark
-
- You can use standard Linux tools (e.g. cp or mv) to
- copy/move data between filesystems. This server should
- also be used to copy data from Lustre to other systems.
+ Welcome to training - CentOS release 6
 
 </code></pre>
             <pre class="input"><code>$ ls n*</code></pre>
@@ -276,12 +262,12 @@ Last login: Wed Apr 15 11:14:28 2015 from 10.20.14.45
 - get post-doc position (pref. with Dr. Horrible)
 </code></pre>
             <pre class="input"><code>$ exit</code></pre>
-            <p>Now we are going to copy an entire directory into your home directory on hpcgate.
+            <p>Now we are going to copy an entire directory into your home directory on training.
             Here is the command to copy across a directory,
             you will need to use the option <code>-r</code> of the <code>scp</code> command.
             To know more about a command, you can always type <code>man scp</code>.</p>
-            <pre class="input"><code>$ scp -r molecules/ pajon01@hpcgate.cri.camres.org:</code></pre>
-            <pre class="output"><code>pajon01@hpcgate.cri.camres.org's password:
+            <pre class="input"><code>$ scp -r molecules/ pajon01@training.cri.camres.org:.</code></pre>
+            <pre class="output"><code>pajon01@training.cri.camres.org's password:
 pentane.pdb                                                                               100% 1226     1.2KB/s   00:00
 methane.pdb                                                                               100%  422     0.4KB/s   00:00
 ethane.pdb                                                                                100%  622     0.6KB/s   00:00
@@ -291,29 +277,20 @@ octane.pdb                                                                      
 </code></pre>
 
             <p>These files are pretty small, so they have been copied very quickly. Let's now check that they are
-            actually on our remote server hpcgate.</p>
-            <pre class="input"><code>$ ssh pajon01@hpcgate.cri.camres.org</code></pre>
-            <pre class="output"><code>pajon01@hpcgate.cri.camres.org's password:
-Last login: Wed Apr 15 11:14:28 2015 from 10.20.14.45
+            actually on our remote server training.</p>
+            <pre class="input"><code>$ ssh pajon01@training.cri.camres.org</code></pre>
+            <pre class="output"><code>pajon01@training.cri.camres.org's password:
+Last login: Thu Jun 18 05:17:44 2015 from 10.20.14.45
 
  +-++-++-++-+ +-++-+
  |C||R||U||K| |C||I|
  +-++-++-++-+ +-++-+
 
- Welcome to HPCGATE - CentOS release 6
-
- This server provides mount points for:
- -     Cluster home: /home
- -     Lustre filesystem: /lustre
- -     ark.cruk.cam.ac.uk: /archive/Ark
-
- You can use standard Linux tools (e.g. cp or mv) to
- copy/move data between filesystems. This server should
- also be used to copy data from Lustre to other systems.
+ Welcome to training - CentOS release 6
 
 </code></pre>
             <pre class="input"><code>$ ls molecules/</code></pre>
-            <pre class="output"><code>cubane.pdb  ethane.pdb  methane.pdb  octane.pdb  pentane.pdb  propane.pdb</code></pre>
+            <pre class="output"><code>﻿cubane.pdb  ethane.pdb  lenghts.txt  methane.pdb  octane.pdb  pentane.pdb  propane.pdb  sorted-lenghts.txt</code></pre>
             <pre class="input"><code>$ exit</code></pre>
 
             <p>The scp command can be used in three* ways: to copy from your computer to a (remote) server as we've just done,
@@ -336,12 +313,12 @@ http://hgdownload.cse.ucsc.edu/goldenPath/oryCun2/database/cds.txt.gz</code></pr
 
             <div id="exploring-ssh" class="challenge">
                 <h2>Listing Directories and Files on Remote Host</h2>
-                <p>Explain which commands will you use to explore the directory <code>/archive</code> on the hpcgate.</p>
+                <p>Explain which commands will you use to explore the directory <code>/home</code> on the training server.</p>
             </div>
 
             <div id="exploring-scp" class="challenge">
                 <h2>Exploring more <code>scp</code> Command</h2>
-                <p>Explain how to copy the remote file notes.txt on hpcgate from your home directory into a new directory called remote/ on your local machine.</p>
+                <p>Explain how to copy the remote file notes.txt on training server from your home directory into a new directory called remote/ on your local machine.</p>
             </div>
 
             <h2 id="next">Next topic</h2>

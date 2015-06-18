@@ -38,7 +38,7 @@ RUN chmod 711 /users/dru
 RUN chmod 711 /users/gorgon
 
 RUN git clone https://github.com/swcarpentry/shell-novice.git
-RUN scp -r shell-novice/filesystem/users/nelle /users/
+RUN scp -r shell-novice/filesystem/nelle /users/
 
 RUN chown -R nelle /users/nelle
 RUN chmod -R 711 /users/nelle
