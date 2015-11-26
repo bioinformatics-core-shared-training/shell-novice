@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# ShellCam lubuntu LTS 14.04 VirtualBox installer based on lubuntu-14.04.2-desktop-i386
-# computer name: shell-training; user: training; password: shell123
+# lubuntu LTS 14.04 VirtualBox installer based on lubuntu-14.04.2-desktop-i386
+# computer name: crukci-training-vm; user: training; password: admin123
 
 # login as training -----------------------------------------------------------
 
@@ -25,15 +25,7 @@ sudo ./VBoxLinuxAdditions.run
 
 # Install course materials
 useradd nelle -d /users/nelle -p elephant
-useradd imhotep -d /users/imhotep
-useradd larry -d /users/larry
-useradd dru -d /users/dru
-useradd gorgon -d /users/gorgon
 
-mkdir -p /users/imhotep
-mkdir -p /users/larry
-mkdir -p /users/dru
-mkdir -p /users/gorgon
 mkdir -p /users/nelle
 
 mkdir -p /data/backup
@@ -41,41 +33,20 @@ touch /data/access.log
 touch /data/hardware.cfg
 touch /data/network.cfg
 
-chown -R imhotep /users/imhotep
-chown -R larry /users/larry
-chown -R dru /users/dru
-chown -R gorgon /users/gorgon
-
-chmod 711 /users/imhotep
-chmod 711 /users/larry
-chmod 711 /users/dru
-chmod 711 /users/gorgon
-
 git clone https://github.com/bioinformatics-core-shared-training/shell-novice.git
 scp -r shell-novice/filesystem/nelle /users/
 
-chown -R nelle /users/nelle
-chgrp -R nelle /users/nelle
+chown -R nelle:nelle /users/nelle
 chmod -R 711 /users/nelle
 
 # Change password for nelle account Start > System Tools > Users and Groups
 # and set shell in advance settings tab Advanced to bash
 
-# auto login add these lines
-#[SeatDefaults]
-#autologin-user=nelle
-#autologin-user-timeout=0
-# Check https://bugs.launchpad.net/lightdm/+bug/854261 before setting a timeout
-#user-session=Lubuntu
-#greeter-session=lightdm-gtk-greeter
-# in:
-nano /etc/lightdm/lightdm.conf
-
 apt-get autoremove
 apt-get clean
 exit
 
-# login as nelle --------------------------------------------------------------
+# login as nelle / Shell Training ---------------------------------------------
 rm -rf Documents/ Downloads/ Music/ Pictures/ Templates/ Videos/
 
 # Add extra keyboard layouts
@@ -87,4 +58,8 @@ xdg-user-dires-update
 
 ### After testing course materials, re-set course structure using this command:
 sudo su -
-rsync -avr --delete --exclude '.*' --exclude 'Desktop' shell-novice/filesystem/nelle /users/
+cd shell-novice
+git pull
+rsync -avr --delete --exclude '.*' --exclude 'Desktop' filesystem/nelle /users/
+chown -R nelle:nelle /users/nelle
+chmod -R 711 /users/nelle
