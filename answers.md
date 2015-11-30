@@ -1,14 +1,14 @@
-# Shell Novice: The Linux Shell - Answers
+# Shell Novice: The Linux Shell - Answers Version 1.1
 
 ## Files and Directories
 
 ### Relative path resolution
 
-1. (1) `ls: cannot access ../backup: No such file or directory`
+1. (4) `original pnas_final pnas_sub`
 
 ### Reading comprehension
 
-1. (2) `$ ls -r -F`
+1. (2 or 3) `$ ls -r -F` or `ls -r -F /users/backup`
 
 ### Default `cd` action
 
@@ -110,7 +110,17 @@ Copy SOURCE to DEST, or multiple SOURCE(s) to DIRECTORY.
 
 ### Little women
 
-1. `$ for lw in Jo Amy; do echo "$lw,"$(grep -wo $lw littlewomen.txt | wc -l); done`
+1. To get tabulated data out (with totals) you would need somthing like the following for-loop:
+
+`$ for lw in Jo Amy; do echo ""$lw","$(grep -wo $lw littlewomen.txt | wc -l)""; done`
+
+It's also worth mentioning the OR operator in Grep which enables each occurrence of each name to be listed with a simple one-liner:
+
+`$ grep -wo 'Jo\|Amy' littlewomen.txt`
+
+To make it slightly easier to distinguish the winner you could pipe to the `sort` command:
+
+`$ grep -wo 'Jo\|Amy' littlewomen.txt | sort`
 
 ## Transferring Files and Accessing a Remote Server
 
@@ -120,7 +130,7 @@ Copy SOURCE to DEST, or multiple SOURCE(s) to DIRECTORY.
 
 ### Listing directories and files on a remote host
 
-1. `$ scp training1@10.20.208.208 ls -F /home`
+1. `$ ssh training1@10.20.208.208 ls -F /home`
 
 ### Exploring more `scp` commands
 
@@ -172,7 +182,7 @@ Copy SOURCE to DEST, or multiple SOURCE(s) to DIRECTORY.
 
 ### Variables in shell scripts
 
-1. (2) The first and last line of each file enting in *.pdb in the molecules directory
+1. (4) An error because of the quotes around *.pdb
 
 ### List unique species
 
@@ -202,7 +212,7 @@ Copy SOURCE to DEST, or multiple SOURCE(s) to DIRECTORY.
 
 * Double-check the commands you have just run
 * Re-run commands without having to retype them
-* Hand a P45 to the person who got trigger happy with `rm -rf`
+* Hand a P45 to the person who got trigger-happy with `rm -rf`
 
 ### Script reading comprehension
 
