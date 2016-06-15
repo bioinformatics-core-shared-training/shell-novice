@@ -199,63 +199,40 @@ Length: 13011 (13K)
             <p><code>ssh</code> (Secure Shell) is a network protocol that allows a secure access over an encrypted connection.
             Through an SSH connection you can easily manage your files and folders, modify their permissions, edit files directly on the server,
             configure and install your scripts, etc. <code>ssh</code> is used to securely login to a Linux / UNIX host running the sshd daemon on a reachable network.</p>
-            <p>We will be accessing a training server using our own CRUK-CI credentials and <code>ssh</code> command. Below is the command to use,
-            but you will have to replace <code>pajon01</code> by your personal username. Then you will have to type <code>yes</code> to the question
-            'Are you sure you want to continue connecting (yes/no)?' and finally enter your own password to be able to log in.</p>
-            <p>If you do not have a CRUK-CI account, you can still do these following steps but you have to use another server when connected to our REDROOM wireless
-            called by its IP address 10.20.208.208 using this command: <code>ssh training1@10.20.208.208</code> instead of the one bellow. We have created 30 accounts from training1 to training30
-            with their passwords matching the account name.</p>
-            <pre class="input"><code>$ ssh pajon01@training.cri.camres.org</code></pre>
-            <pre class="output"><code>﻿The authenticity of host 'training.cri.camres.org (10.20.128.245)' can't be established.
-RSA key fingerprint is 3f:bc:6d:9f:2a:15:b8:6f:91:ec:cc:ef:a9:44:ab:11.
-Are you sure you want to continue connecting (yes/no)? yes
-Warning: Permanently added 'training.cri.camres.org,10.20.128.245' (RSA) to the list of known hosts.
-pajon01@training.cri.camres.org's password:
-Last login: Thu Jun 18 04:36:15 2015 from 10.20.14.45
-
- +-++-++-++-+ +-++-+
- |C||R||U||K| |C||I|
- +-++-++-++-+ +-++-+
-
- Welcome to training - CentOS release 6
-
-﻿[pajon01@training ~]$</code></pre>
+            <p>We will be accessing a training server, which his IP address is 10.20.222.90, using the <code>ssh</code> command. Below is the command to use,
+            but each of you will have to use a different account from training1 to training30 and enter the password that matches the account name.</p>
+            <pre class="input"><code>$ ssh training1@10.20.222.90</code></pre>
+            <pre class="output"><code>training1@10.20.222.90's password:
+Last login: Wed Jun 15 15:36:34 2016 from 10.21.1.103
+-bash-4.1$ </code></pre>
             <p>At this point, you are physically on the training server inside your home directory. The directory structure is now completely different to the one you had before and you can no-longer access the files within nelle's file system. However, you can still use the same commands you have seen already. If you now type these
             commands the outputs will now be specific to you.</p>
             <pre class="input"><code>$ whoami</code></pre>
-            <pre class="output"><code>pajon01</code></pre>
+            <pre class="output"><code>taining1</code></pre>
             <pre class="input"><code>$ pwd</code></pre>
-            <pre class="output"><code>/home/pajon01</code></pre>
+            <pre class="output"><code>/home/training1</code></pre>
             <pre class="input"><code>$ ls</code></pre>
             <p>To return to our own computer as user nelle, you will have to type the <code>exit</code> command.</p>
             <pre class="input"><code>$ exit</code></pre>
-            <pre class="output"><code>﻿logout
-Connection to training.cri.camres.org closed.
+            <pre class="output"><code> logout
+Connection to 10.20.222.90 closed.
 </code></pre>
 
             <h2>Copying Files and Directories</h2>
             <p><code>ssh</code> protocol can also be used to copy files & directories, using
             the same connection method as above but the command we use is <code>scp</code>.</p>
             <p>This will copy the file notes.txt from its current location within nelle's file system to your home directory
-            on training. Again, remember to replace <code>pajon01</code> with your own username.</p>
-            <pre class="input"><code>$ ﻿scp notes.txt pajon01@training.cri.camres.org:.</code></pre>
+            on training. Again, remember to replace <code>training1</code> with your own username.</p>
+            <pre class="input"><code>$ ﻿scp notes.txt training1@10.20.222.90:.</code></pre>
             <p>Do not forget the trailing characters <code>:.</code></p>
-            <pre class="output"><code>﻿pajon01@training.cri.camres.org's password:
+            <pre class="output"><code> training1@10.20.222.90's password:
 notes.txt                                                                                 100%   86     0.1KB/s   00:00
 </code></pre>
             <p>Similarly to the <code>wget</code> command, it shows upload progress, size, speed and time while uploading.
             It displays a 100% when the file is copied.</p>
             <p>Let's now connect to the training server to check that the file has really been copied.</p>
-            <pre class="input"><code>$ ssh pajon01@training.cri.camres.org</code></pre>
-            <pre class="output"><code>﻿pajon01@training.cri.camres.org's password:
-Last login: Thu Jun 18 05:13:23 2015 from 10.20.14.45
-
- +-++-++-++-+ +-++-+
- |C||R||U||K| |C||I|
- +-++-++-++-+ +-++-+
-
- Welcome to training - CentOS release 6
-
+            <pre class="input"><code>$ ssh training1@10.20.222.90</code></pre>
+            <pre class="output"><code> training1@10.20.222.90's password:
 </code></pre>
             <pre class="input"><code>$ ls n*</code></pre>
             <pre class="output"><code>notes.txt</code></pre>
@@ -269,8 +246,8 @@ Last login: Thu Jun 18 05:13:23 2015 from 10.20.14.45
             Here is the command to copy across a directory,
             you will need to use the option <code>-r</code> of the <code>scp</code> command.
             To know more about a command, you can always type <code>man scp</code>.</p>
-            <pre class="input"><code>$ scp -r molecules/ pajon01@training.cri.camres.org:.</code></pre>
-            <pre class="output"><code>pajon01@training.cri.camres.org's password:
+            <pre class="input"><code>$ scp -r molecules/ training1@10.20.222.90:.</code></pre>
+            <pre class="output"><code> training1@10.20.222.90's password:
 pentane.pdb                                      100% 1226     1.2KB/s   00:00
 methane.pdb                                      100%  422     0.4KB/s   00:00
 ethane.pdb                                       100%  622     0.6KB/s   00:00
@@ -281,16 +258,8 @@ octane.pdb                                       100% 1828     1.8KB/s   00:00
 
             <p>These files are pretty small, so they have been copied very quickly. Let's now check that they are
             actually on our remote server training.</p>
-            <pre class="input"><code>$ ssh pajon01@training.cri.camres.org</code></pre>
-            <pre class="output"><code>pajon01@training.cri.camres.org's password:
-Last login: Thu Jun 18 05:17:44 2015 from 10.20.14.45
-
- +-++-++-++-+ +-++-+
- |C||R||U||K| |C||I|
- +-++-++-++-+ +-++-+
-
- Welcome to training - CentOS release 6
-
+            <pre class="input"><code>$ ssh training1@10.20.222.90</code></pre>
+            <pre class="output"><code>training1@10.20.222.90's password:
 </code></pre>
             <pre class="input"><code>$ ls molecules/</code></pre>
             <pre class="output"><code>﻿cubane.pdb  ethane.pdb  lenghts.txt  methane.pdb  octane.pdb  pentane.pdb  propane.pdb  sorted-lenghts.txt</code></pre>
