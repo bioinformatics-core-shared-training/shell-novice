@@ -137,7 +137,7 @@ $ wc -l *.txt</code></pre>
 300 NENE01736A.txt
 300 NENE01751A.txt</code></pre>
             <p>Whoops: one of the files is 60 lines shorter than the others. When she goes back and checks it, she sees that she did that assay at 8:00 on a Monday morning --- someone was probably in using the machine on the weekend, and she forgot to reset it. Before re-running that sample, she checks to see if any files have too much data:</p>
-            <pre class="input"><code>$ wc -l *.txt | sort -n | tail -5</code></pre>
+            <pre class="input"><code>$ wc -l *.txt | sort -n | tail -5 | head -n -1</code></pre>
 <pre class="output"><code>300 NENE02040A.txt
 300 NENE02040B.txt
 300 NENE02040Z.txt
