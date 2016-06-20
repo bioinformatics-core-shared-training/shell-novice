@@ -72,7 +72,7 @@ Saving to: 'ccdsGene.txt.gz'
 
             <p>Unless you specify otherwise, the file created in your current directory will have the same name as the
             file you are downloading. Using <code>-O</code> (uppercase letter 'O') option creates a file with a specified
-            name. Here we have given mm10_cds.txt.gz file name as show below.</p>
+            name. Here we have given mm10_geneid.txt.gz file name as show below.</p>
             <pre class="input"><code>$ wget -O mm10_ccdsGene.txt.gz http://hgdownload.soe.ucsc.edu/goldenPath/mm10/database/ccdsGene.txt.gz</code></pre>
             <pre class="output"><code>--2015-04-15 09:41:49--  http://hgdownload.soe.ucsc.edu/goldenPath/mm10/database/ccdsGene.txt.gz
 Resolving hgdownload.soe.ucsc.edu (hgdownload.soe.ucsc.edu)... 128.114.119.163
@@ -99,29 +99,29 @@ Saving to: 'mm10_ccdsGene.txt.gz'
             middle. Instead of starting the whole download again, you can start the download from where it got
             interrupted using the option <code>-c</code>.</p>
             <p>Here is an example of downloading a file which got interrupted manually by using Ctrl-C command on the keyboard.</p>
-            <pre class="input"><code>$ wget http://hgdownload.cse.ucsc.edu/goldenPath/eriEur2/database/cds.txt.gz</code></pre>
-            <pre class="output"><code>--2015-04-17 09:40:23--  http://hgdownload.cse.ucsc.edu/goldenPath/eriEur2/database/cds.txt.gz
+            <pre class="input"><code>$ wget http://hgdownload.cse.ucsc.edu/goldenPath/eriEur2/database/geneid.txt.gz</code></pre>
+            <pre class="output"><code>--2015-04-17 09:40:23--  http://hgdownload.cse.ucsc.edu/goldenPath/eriEur2/database/geneid.txt.gz
 Resolving hgdownload.cse.ucsc.edu (hgdownload.cse.ucsc.edu)... 128.114.119.163
 Connecting to hgdownload.cse.ucsc.edu (hgdownload.cse.ucsc.edu)|128.114.119.163|:80... connected.
 HTTP request sent, awaiting response... 200 OK
 Length: 1955793 (1.9M) [application/x-gzip]
-Saving to: 'cds.txt.gz'
+Saving to: 'geneid.txt.gz'
 
 52% [========================================>                                      ] 1,022,856    551KB/s             ^C
 </code></pre>
             <p>To continue the download instead of restarting it, you can use the option <code>-c</code>, the download
             of the file will then restart where it did stop, as shown bellow.</p>
-            <pre class="input"><code>$ wget -c http://hgdownload.cse.ucsc.edu/goldenPath/eriEur2/database/cds.txt.gz</code></pre>
-            <pre class="output"><code>--2015-04-17 09:40:33--  http://hgdownload.cse.ucsc.edu/goldenPath/eriEur2/database/cds.txt.gz
+            <pre class="input"><code>$ wget -c http://hgdownload.cse.ucsc.edu/goldenPath/eriEur2/database/geneid.txt.gz</code></pre>
+            <pre class="output"><code>--2015-04-17 09:40:33--  http://hgdownload.cse.ucsc.edu/goldenPath/eriEur2/database/geneid.txt.gz
 Resolving hgdownload.cse.ucsc.edu (hgdownload.cse.ucsc.edu)... 128.114.119.163
 Connecting to hgdownload.cse.ucsc.edu (hgdownload.cse.ucsc.edu)|128.114.119.163|:80... connected.
 HTTP request sent, awaiting response... 206 Partial Content
 Length: 1955793 (1.9M), 819497 (800K) remaining [application/x-gzip]
-Saving to: 'cds.txt.gz'
+Saving to: 'geneid.txt.gz'
 
 100%[+++++++++++++++++++++++++++++++++++++++++++++=================================>] 1,955,793    521KB/s   in 1.5s
 
-2015-04-17 09:40:35 (521 KB/s) - 'cds.txt.gz' saved [1955793/1955793]
+2015-04-17 09:40:35 (521 KB/s) - 'geneid.txt.gz' saved [1955793/1955793]
 
 </code></pre>
 
